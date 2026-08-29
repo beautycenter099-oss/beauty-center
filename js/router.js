@@ -2,13 +2,13 @@ import { isAuthenticated } from './auth.js';
 
 // Map each hash route to a page config
 const ROUTES = {
-  '#overview':  { title: 'نظرة عامة',              template: 'pages/overview',  module: () => import('./pages/overview.js') },
-  '#bookings':  { title: 'الحجوزات المنزلية',      template: 'pages/bookings',  module: () => import('./pages/bookings.js') },
-  '#customers': { title: 'العملاء',                template: 'pages/customers', module: () => import('./pages/customers.js') },
-  '#orders':    { title: 'طلبات التوصيل',          template: 'pages/orders',    module: () => import('./pages/orders.js') },
-  '#catalog':   { title: 'الخدمات والمنتجات',      template: 'pages/catalog',   module: () => import('./pages/catalog.js') },
-  '#staff':     { title: 'الموظفون',               template: 'pages/staff',     module: () => import('./pages/staff.js') },
-  '#settings':  { title: 'إعدادات العمل',          template: 'pages/settings',  module: () => import('./pages/settings.js') },
+  '#overview':  { title: 'نظرة عامة',              template: 'pages/overview.html',  module: () => import('./pages/overview.js') },
+  '#bookings':  { title: 'الحجوزات المنزلية',      template: 'pages/bookings.html',  module: () => import('./pages/bookings.js') },
+  '#customers': { title: 'العملاء',                template: 'pages/customers.html', module: () => import('./pages/customers.js') },
+  '#orders':    { title: 'طلبات التوصيل',          template: 'pages/orders.html',    module: () => import('./pages/orders.js') },
+  '#catalog':   { title: 'الخدمات والمنتجات',      template: 'pages/catalog.html',   module: () => import('./pages/catalog.js') },
+  '#staff':     { title: 'الموظفون',               template: 'pages/staff.html',     module: () => import('./pages/staff.js') },
+  '#settings':  { title: 'إعدادات العمل',          template: 'pages/settings.html',  module: () => import('./pages/settings.js') },
 };
 
 const DEFAULT_ROUTE = '#overview';
