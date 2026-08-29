@@ -1,0 +1,85 @@
+<div class="overview-welcome">
+  <h1 class="overview-greeting" id="overview-greeting">صباح الخير 👋</h1>
+  <p class="overview-date" id="overview-date"></p>
+</div>
+
+<!-- بطاقات المؤشرات -->
+<div class="kpi-grid">
+  <div class="kpi-card">
+    <div class="kpi-icon kpi-icon-gold">📅</div>
+    <div class="kpi-label">حجوزات اليوم</div>
+    <div class="kpi-value" id="kpi-today-bookings">—</div>
+    <div class="kpi-trend">زيارات منزلية مجدولة</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-icon kpi-icon-green">💰</div>
+    <div class="kpi-label">الإيرادات الشهرية</div>
+    <div class="kpi-value" id="kpi-monthly-revenue" style="font-size:var(--text-2xl)">—</div>
+    <div class="kpi-trend">حجوزات + طلبات هذا الشهر</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-icon kpi-icon-rose">👥</div>
+    <div class="kpi-label">إجمالي العملاء</div>
+    <div class="kpi-value" id="kpi-total-customers">—</div>
+    <div class="kpi-trend">مسجلون عبر واتساب</div>
+  </div>
+
+  <div class="kpi-card">
+    <div class="kpi-icon kpi-icon-warn">⏳</div>
+    <div class="kpi-label">حجوزات غير مدفوعة</div>
+    <div class="kpi-value" id="kpi-unpaid">—</div>
+    <div class="kpi-trend">بانتظار الدفع</div>
+  </div>
+</div>
+
+<!-- النشاط الأخير -->
+<div class="recent-grid">
+  <!-- آخر الحجوزات -->
+  <div class="recent-card">
+    <div class="recent-card-header">
+      <h2 class="recent-card-title">آخر الحجوزات</h2>
+      <button class="btn btn-ghost btn-sm" onclick="window.location.hash='#bookings'">عرض الكل ←</button>
+    </div>
+    <div class="table-wrapper" style="border:none;border-radius:0">
+      <table class="data-table recent-table">
+        <thead>
+          <tr>
+            <th>الكود</th>
+            <th>العميل</th>
+            <th>التاريخ</th>
+            <th>المبلغ</th>
+            <th>الحالة</th>
+          </tr>
+        </thead>
+        <tbody id="recent-bookings-tbody">
+          <tr><td colspan="5" style="text-align:center;padding:2rem"><div class="spinner" style="margin:auto"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- آخر الطلبات -->
+  <div class="recent-card">
+    <div class="recent-card-header">
+      <h2 class="recent-card-title">آخر الطلبات</h2>
+    </div>
+    <div class="table-wrapper" style="border:none;border-radius:0">
+      <table class="data-table recent-table">
+        <thead>
+          <tr>
+            <th>الكود</th>
+            <th>العميل</th>
+            <th>التاريخ</th>
+            <th>المبلغ</th>
+            <th>الحالة</th>
+          </tr>
+        </thead>
+        <tbody id="recent-orders-tbody">
+          <tr><td colspan="5" style="text-align:center;padding:2rem"><div class="spinner" style="margin:auto"></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مركز التجميل — لوحة الإدارة</title>
+  <meta name="description" content="لوحة إدارة مركز التجميل لإدارة الحجوزات والطلبات والعملاء." />
+  <meta name="robots" content="noindex, nofollow" />
+
+  <!-- Google Fonts: Cairo (Arabic + Latin) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/login.css" />
+  <link rel="stylesheet" href="css/overview.css" />
+  <link rel="stylesheet" href="css/bookings.css" />
+  <link rel="stylesheet" href="css/customers.css" />
+  <link rel="stylesheet" href="css/orders.css" />
+  <link rel="stylesheet" href="css/catalog.css" />
+  <link rel="stylesheet" href="css/settings.css" />
+  <link rel="stylesheet" href="css/staff.css" />
+</head>
+<body>
+
+  <!-- ════════════════════════════════════════
+       صفحة تسجيل الدخول
+  ════════════════════════════════════════ -->
+  <div id="login-view" role="main" aria-label="تسجيل الدخول">
+    <div class="login-card">
+
+      <div class="login-logo" aria-hidden="true">✦</div>
+
+      <div class="login-heading">
+        <h1 class="login-title">مركز التجميل</h1>
+        <p class="login-sub">لوحة الإدارة</p>
+      </div>
+
+      <form id="login-form" class="login-form" novalidate>
+        <div class="form-group">
+          <label class="label" for="password-input">كلمة المرور</label>
+          <input
+            id="password-input"
+            type="password"
+            class="input"
+            placeholder="أدخل كلمة مرور المدير"
+            autocomplete="current-password"
+            required
+          />
+        </div>
+
+        <p id="login-error" class="login-error" role="alert" aria-live="polite">
+          كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.
+        </p>
+
+        <button type="submit" id="login-submit" class="login-submit">
+          تسجيل الدخول
+        </button>
+      </form>
+
+      <p class="login-footer-note">للاستخدام الداخلي فقط · مركز التجميل</p>
+    </div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       لوحة التحكم
+  ════════════════════════════════════════ -->
+  <div id="dashboard-view" role="main" aria-label="لوحة التحكم">
+
+    <!-- شريط الجانب -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="القائمة الرئيسية">
+
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-name">✦ مركز التجميل</div>
+        <div class="sidebar-brand-sub">لوحة الإدارة</div>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section-label">الرئيسية</div>
+
+        <div class="nav-item active" data-route="#overview" id="nav-overview" tabindex="0" role="button" aria-label="نظرة عامة">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+            <rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/>
+          </svg>
+          نظرة عامة
+        </div>
+
+        <div class="nav-item" data-route="#bookings" id="nav-bookings" tabindex="0" role="button" aria-label="الحجوزات المنزلية">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="4" width="18" height="18" rx="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+          الحجوزات المنزلية
+        </div>
+
+        <div class="nav-item" data-route="#customers" id="nav-customers" tabindex="0" role="button" aria-label="العملاء">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+          العملاء
+        </div>
+
+        <div class="nav-item" data-route="#orders" id="nav-orders" tabindex="0" role="button" aria-label="طلبات التوصيل">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+          طلبات التوصيل
+        </div>
+
+        <div class="nav-section-label">الكتالوج</div>
+
+        <div class="nav-item" data-route="#catalog" id="nav-catalog" tabindex="0" role="button" aria-label="الخدمات والمنتجات">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+          </svg>
+          الخدمات والمنتجات
+        </div>
+
+        <div class="nav-section-label">النظام</div>
+
+        <div class="nav-item" data-route="#staff" id="nav-staff" tabindex="0" role="button" aria-label="الموظفون">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          الموظفون
+        </div>
+
+        <div class="nav-item" data-route="#settings" id="nav-settings" tabindex="0" role="button" aria-label="الإعدادات">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+          </svg>
+          الإعدادات
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="logout-btn" id="logout-btn" aria-label="تسجيل الخروج">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+            <polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>
+          </svg>
+          تسجيل الخروج
+        </button>
+      </div>
+    </aside>
+
+    <!-- المحتوى الرئيسي -->
+    <div class="main-area">
+
+      <!-- الشريط العلوي -->
+      <header class="topbar">
+        <button class="hamburger" id="hamburger-btn" aria-label="القائمة">
+          <span></span><span></span><span></span>
+        </button>
+        <h2 class="topbar-title" id="topbar-title">نظرة عامة</h2>
+        <div class="topbar-right">
+          <span class="topbar-date" id="topbar-date"></span>
+        </div>
+      </header>
+
+      <!-- محتوى الصفحة الديناميكي -->
+      <main id="page-content">
+        <!-- يُحمَّل تلقائياً بواسطة router.js -->
+      </main>
+    </div>
+
+    <!-- ظل الشريط الجانبي (موبايل) -->
+    <div id="sidebar-scrim" class="sidebar-scrim" aria-hidden="true"></div>
+  </div>
+
+
+  <!-- ════════════════════════════════════════
+       درج التفاصيل (عام)
+  ════════════════════════════════════════ -->
+  <div id="drawer-scrim" class="drawer-scrim" aria-hidden="true"></div>
+
+  <aside id="drawer" class="drawer" role="dialog" aria-modal="true" aria-label="لوحة التفاصيل">
+    <div class="drawer-header">
+      <div>
+        <div class="drawer-title" id="drawer-title">التفاصيل</div>
+        <div class="drawer-subtitle" id="drawer-subtitle"></div>
+      </div>
+      <button class="drawer-close" id="drawer-close-x" aria-label="إغلاق">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="drawer-body" id="drawer-body"></div>
+
+    <div class="drawer-footer" id="drawer-footer"></div>
+  </aside>
+
+
+  <!-- ════════════════════════════════════════
+       إشعارات التنبيه
+  ════════════════════════════════════════ -->
+  <div id="toast-container" class="toast-container" role="status" aria-live="polite"></div>
+
+
+  <!-- ════════════════════════════════════════
+       JavaScript (وحدات ES)
+  ════════════════════════════════════════ -->
+  <script type="module">
+    import { isAuthenticated, login, logout } from './js/auth.js';
+    import { initRouter, showLogin, showDashboard, navigate } from './js/router.js';
+    import { closeDrawer } from './js/ui.js';
+
+    // ─── تاريخ الشريط العلوي ─────────────────────────────
+    const topbarDate = document.getElementById('topbar-date');
+    if (topbarDate) {
+      topbarDate.textContent = new Date().toLocaleDateString('ar-OM', {
+        day: 'numeric', month: 'long', year: 'numeric'
+      });
+    }
+
+    // ─── نموذج تسجيل الدخول ──────────────────────────────
+    const loginForm  = document.getElementById('login-form');
+    const loginError = document.getElementById('login-error');
+
+    loginForm?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const password = document.getElementById('password-input').value;
+      if (login(password)) {
+        loginError.classList.remove('visible');
+        showDashboard('#overview');
+      } else {
+        loginError.classList.add('visible');
+        document.getElementById('password-input').select();
+      }
+    });
+
+    // ─── تسجيل الخروج ────────────────────────────────────
+    document.getElementById('logout-btn')?.addEventListener('click', () => {
+      logout();
+      showLogin();
+    });
+
+    // ─── التنقل في الشريط الجانبي ───────────────────────
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', () => {
+        navigate(item.dataset.route);
+        // إغلاق الشريط على الموبايل
+        document.getElementById('sidebar').classList.remove('open');
+        document.getElementById('sidebar-scrim').classList.remove('open');
+      });
+      item.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); }
+      });
+    });
+
+    // ─── زر القائمة (موبايل) ─────────────────────────────
+    document.getElementById('hamburger-btn')?.addEventListener('click', () => {
+      const sidebar = document.getElementById('sidebar');
+      const scrim   = document.getElementById('sidebar-scrim');
+      const isOpen  = sidebar.classList.toggle('open');
+      scrim.classList.toggle('open', isOpen);
+    });
+
+    // ─── إغلاق الشريط عند النقر على الظل ─────────────────
+    document.getElementById('sidebar-scrim')?.addEventListener('click', () => {
+      document.getElementById('sidebar').classList.remove('open');
+      document.getElementById('sidebar-scrim').classList.remove('open');
+    });
+
+    // ─── إغلاق درج التفاصيل ──────────────────────────────
+    document.getElementById('drawer-close-x')?.addEventListener('click', closeDrawer);
+    document.getElementById('drawer-scrim')?.addEventListener('click', closeDrawer);
+
+    // ─── تهيئة التوجيه ───────────────────────────────────
+    initRouter();
+
+    // ─── المسار الأولي ───────────────────────────────────
+    if (isAuthenticated()) {
+      showDashboard(window.location.hash || '#overview');
+    } else {
+      showLogin();
+    }
+  </script>
+
+</body>
+</html>

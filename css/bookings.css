@@ -1,0 +1,98 @@
+/* ─── Bookings Page ─── */
+.bookings-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.bookings-filter-bar .filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.bookings-filter-bar label {
+  font-size: var(--text-sm);
+  color: var(--text-mid);
+  white-space: nowrap;
+}
+
+.date-range-inputs {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.date-range-inputs .input {
+  width: 145px;
+  padding: var(--space-2) var(--space-3);
+}
+
+.date-separator {
+  color: var(--text-light);
+  font-size: var(--text-sm);
+}
+
+.status-select {
+  width: 155px;
+  padding: var(--space-2) var(--space-3);
+  padding-right: 36px;
+}
+
+.bookings-results-count {
+  font-size: var(--text-sm);
+  color: var(--text-light);
+  margin-left: auto;
+}
+
+/* ─── Booking Code ─── */
+.booking-code {
+  font-family: monospace;
+  font-size: var(--text-xs);
+  background: var(--warm-beige-deep);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  color: var(--text-mid);
+  letter-spacing: 0.05em;
+}
+
+/* ─── Services tags inside table ─── */
+.services-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.service-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  background: var(--accent-gold-light);
+  color: var(--accent-gold-hover);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+/* ─── Booking Detail in Drawer ─── */
+.booking-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-4) 0;
+  border-top: 2px solid var(--border);
+  margin-top: var(--space-2);
+}
+
+.booking-total-label {
+  font-weight: var(--font-semibold);
+  font-size: var(--text-base);
+  color: var(--text-dark);
+}
+
+.booking-total-value {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--font-semibold);
+  color: var(--accent-gold-hover);
+}

@@ -1,0 +1,57 @@
+<div class="page-header">
+  <div>
+    <h1 class="page-header-title">الحجوزات المنزلية</h1>
+    <p class="page-header-sub">إدارة جميع زيارات الخدمة المنزلية</p>
+  </div>
+  <button id="export-bookings-btn" class="btn btn-ghost" style="display:none">تصدير</button>
+</div>
+
+<!-- شريط الفلترة -->
+<div class="bookings-filter-bar">
+  <div class="filter-group">
+    <label>الحالة</label>
+    <select id="filter-status" class="input select status-select">
+      <option value="">جميع الحالات</option>
+      <option value="confirmed">مؤكد</option>
+      <option value="completed">مكتمل</option>
+      <option value="cancelled">ملغي</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>من</label>
+    <div class="date-range-inputs">
+      <input type="date" id="filter-date-from" class="input" />
+      <span class="date-separator">إلى</span>
+      <input type="date" id="filter-date-to" class="input" />
+    </div>
+  </div>
+
+  <button id="filter-clear" class="btn btn-ghost btn-sm">مسح الفلاتر</button>
+  <span class="bookings-results-count" id="bookings-count"></span>
+</div>
+
+<!-- جدول الحجوزات -->
+<div class="table-wrapper">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>الكود</th>
+        <th>العميل</th>
+        <th>التاريخ</th>
+        <th>الوقت</th>
+        <th>الخدمات</th>
+        <th>المبلغ</th>
+        <th>الحالة</th>
+        <th>الدفع</th>
+      </tr>
+    </thead>
+    <tbody id="bookings-tbody">
+      <tr>
+        <td colspan="8" style="text-align:center;padding:3rem">
+          <div class="spinner" style="margin:auto"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

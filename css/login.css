@@ -1,0 +1,99 @@
+/* ─── Login Page ─── */
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--warm-beige);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-xl);
+  padding: var(--space-12) var(--space-10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-6);
+}
+
+.login-logo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-rose) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  box-shadow: 0 8px 24px rgba(196, 151, 90, 0.3);
+}
+
+.login-heading {
+  text-align: center;
+}
+
+.login-title {
+  font-family: var(--font-display);
+  font-size: var(--text-3xl);
+  font-weight: var(--font-semibold);
+  color: var(--text-dark);
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+.login-sub {
+  font-size: var(--text-sm);
+  color: var(--text-light);
+  margin-top: var(--space-2);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.login-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.login-error {
+  font-size: var(--text-sm);
+  color: var(--danger);
+  text-align: center;
+  background: var(--danger-light);
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+  display: none;
+}
+
+.login-error.visible {
+  display: block;
+}
+
+.login-submit {
+  width: 100%;
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-gold-hover) 100%);
+  color: #fff;
+  font-size: var(--text-base);
+  font-weight: var(--font-semibold);
+  letter-spacing: 0.03em;
+  border: none;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  box-shadow: 0 4px 16px rgba(196, 151, 90, 0.3);
+  font-family: var(--font-body);
+}
+
+.login-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(196, 151, 90, 0.4);
+}
+
+.login-submit:active {
+  transform: translateY(0);
+}
+
+.login-footer-note {
+  font-size: var(--text-xs);
+  color: var(--text-light);
+  text-align: center;
+}

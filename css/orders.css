@@ -1,0 +1,80 @@
+/* ─── Orders Page ─── */
+.orders-filter-bar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.orders-filter-bar .filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.orders-filter-bar label {
+  font-size: var(--text-sm);
+  color: var(--text-mid);
+  white-space: nowrap;
+}
+
+.orders-results-count {
+  font-size: var(--text-sm);
+  color: var(--text-light);
+  margin-left: auto;
+}
+
+.order-code {
+  font-family: monospace;
+  font-size: var(--text-xs);
+  background: var(--warm-beige-deep);
+  padding: 2px 8px;
+  border-radius: var(--radius-sm);
+  color: var(--text-mid);
+  letter-spacing: 0.05em;
+}
+
+.products-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.product-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  background: var(--info-light);
+  color: #4A7FAA;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.order-total-row {
+  margin-top: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: 2px solid var(--border);
+}
+
+.order-total-line {
+  display: flex;
+  justify-content: space-between;
+  padding: var(--space-2) 0;
+  font-size: var(--text-sm);
+  color: var(--text-mid);
+}
+
+.order-total-line.grand {
+  font-weight: var(--font-semibold);
+  font-size: var(--text-base);
+  color: var(--text-dark);
+  border-top: 1px solid var(--border-light);
+  padding-top: var(--space-3);
+  margin-top: var(--space-1);
+}
+
+.order-total-line.grand .total-value {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  color: var(--accent-gold-hover);
+}

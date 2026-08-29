@@ -1,0 +1,45 @@
+<div class="page-header">
+  <div>
+    <h1 class="page-header-title">العملاء</h1>
+    <p class="page-header-sub">جميع العملاء المسجلين عبر واتساب</p>
+  </div>
+</div>
+
+<!-- شريط البحث -->
+<div class="customers-search-bar">
+  <div class="search-wrapper">
+    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/>
+    </svg>
+    <input
+      type="text"
+      id="customer-search"
+      class="input"
+      placeholder="ابحث بالاسم أو الهاتف أو واتساب..."
+    />
+  </div>
+  <span class="customers-count" id="customers-count"></span>
+</div>
+
+<!-- جدول العملاء -->
+<div class="table-wrapper">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>العميل</th>
+        <th>الهاتف</th>
+        <th>واتساب</th>
+        <th>الموقع</th>
+        <th>تاريخ التسجيل</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody id="customers-tbody">
+      <tr>
+        <td colspan="6" style="text-align:center;padding:3rem">
+          <div class="spinner" style="margin:auto"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

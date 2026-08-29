@@ -1,0 +1,66 @@
+<div class="page-header">
+  <div>
+    <h1 class="page-header-title">الخدمات والمنتجات</h1>
+    <p class="page-header-sub">إدارة قائمة الخدمات المنزلية والمنتجات</p>
+  </div>
+</div>
+
+<!-- تبويبات الصفحة -->
+<div class="page-tabs" style="justify-content: space-between; align-items: center">
+  <div style="display:flex">
+    <div class="page-tab active" data-tab="services">
+      🛎️ الخدمات المنزلية
+      <span class="tab-count" id="services-tab-count">—</span>
+    </div>
+    <div class="page-tab" data-tab="products">
+      📦 المنتجات
+      <span class="tab-count" id="products-tab-count">—</span>
+    </div>
+  </div>
+  <div style="display:flex;gap:var(--space-3);padding-bottom:2px">
+    <button class="btn btn-primary btn-sm" id="new-service-btn" onclick="window.__catalog_newService?.()">+ خدمة جديدة</button>
+    <button class="btn btn-ghost btn-sm"   id="new-product-btn" onclick="window.__catalog_newProduct?.()">+ منتج جديد</button>
+  </div>
+</div>
+
+<!-- لوحة الخدمات -->
+<div class="tab-panel active" id="panel-services">
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>اسم الخدمة</th>
+          <th>الوصف</th>
+          <th>المدة</th>
+          <th>السعر / شخص</th>
+          <th>نشطة</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="services-tbody">
+        <tr><td colspan="6" style="text-align:center;padding:3rem"><div class="spinner" style="margin:auto"></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- لوحة المنتجات -->
+<div class="tab-panel" id="panel-products">
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>اسم المنتج</th>
+          <th>الوصف</th>
+          <th>السعر</th>
+          <th>المخزون</th>
+          <th>نشط</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="products-tbody">
+        <tr><td colspan="6" style="text-align:center;padding:3rem"><div class="spinner" style="margin:auto"></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>

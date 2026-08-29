@@ -1,0 +1,65 @@
+<div class="page-header">
+  <div>
+    <h1 class="page-header-title">طلبات التوصيل</h1>
+    <p class="page-header-sub">إدارة جميع طلبات توصيل المنتجات</p>
+  </div>
+</div>
+
+<!-- شريط الفلترة -->
+<div class="orders-filter-bar">
+  <div class="filter-group">
+    <label>الحالة</label>
+    <select id="order-filter-status" class="input select" style="width:150px">
+      <option value="">جميع الحالات</option>
+      <option value="confirmed">مؤكد</option>
+      <option value="completed">تم التوصيل</option>
+      <option value="cancelled">ملغي</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>الدفع</label>
+    <select id="order-filter-payment" class="input select" style="width:140px">
+      <option value="">الكل</option>
+      <option value="unpaid">غير مدفوع</option>
+      <option value="paid">مدفوع</option>
+    </select>
+  </div>
+
+  <div class="filter-group">
+    <label>من</label>
+    <div style="display:flex;align-items:center;gap:var(--space-2)">
+      <input type="date" id="order-filter-date-from" class="input" style="width:145px" />
+      <span style="color:var(--text-light);font-size:var(--text-sm)">إلى</span>
+      <input type="date" id="order-filter-date-to" class="input" style="width:145px" />
+    </div>
+  </div>
+
+  <button id="order-filter-clear" class="btn btn-ghost btn-sm">مسح الفلاتر</button>
+  <span class="orders-results-count" id="orders-count"></span>
+</div>
+
+<!-- جدول الطلبات -->
+<div class="table-wrapper">
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>الكود</th>
+        <th>العميل</th>
+        <th>تاريخ التوصيل</th>
+        <th>المنتجات</th>
+        <th>رسوم التوصيل</th>
+        <th>المبلغ الكلي</th>
+        <th>الحالة</th>
+        <th>الدفع</th>
+      </tr>
+    </thead>
+    <tbody id="orders-tbody">
+      <tr>
+        <td colspan="8" style="text-align:center;padding:3rem">
+          <div class="spinner" style="margin:auto"></div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
