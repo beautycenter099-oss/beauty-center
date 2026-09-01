@@ -6,7 +6,10 @@ const ROUTES = {
   '#bookings':  { title: 'الحجوزات المنزلية',      template: 'pages/bookings.html',  module: () => import('./pages/bookings.js') },
   '#customers': { title: 'العملاء',                template: 'pages/customers.html', module: () => import('./pages/customers.js') },
   '#orders':    { title: 'طلبات التوصيل',          template: 'pages/orders.html',    module: () => import('./pages/orders.js') },
+  '#invoices':        { title: 'الفواتير والمبيعات',     template: 'pages/invoices.html',        module: () => import('./pages/invoices.js') },
+  '#create-invoice': { title: 'إنشاء فاتورة جديدة',    template: 'pages/create-invoice.html', module: () => import('./pages/create-invoice.js') },
   '#catalog':   { title: 'الخدمات والمنتجات',      template: 'pages/catalog.html',   module: () => import('./pages/catalog.js') },
+  '#inventory': { title: 'المخزون',                template: 'pages/inventory.html', module: () => import('./pages/inventory.js') },
   '#staff':     { title: 'الموظفون',               template: 'pages/staff.html',     module: () => import('./pages/staff.js') },
   '#settings':  { title: 'إعدادات العمل',          template: 'pages/settings.html',  module: () => import('./pages/settings.js') },
 };

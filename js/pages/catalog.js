@@ -106,7 +106,7 @@ function openServiceDrawer(svc, isNew = false) {
       <div class="form-group">
         <label class="label" for="edit-svc-price">السعر (لكل شخص) *</label>
         <div class="input-with-suffix">
-          <input id="edit-svc-price" type="number" class="input" step="0.001" min="0" value="${svc?.price ?? ''}" required />
+          <input id="edit-svc-price" type="number" class="input" step="0.1" min="0" value="${svc?.price ?? ''}" required />
           <span class="input-suffix">ر.ع</span>
         </div>
       </div>
@@ -263,7 +263,7 @@ function openProductDrawer(prod, isNew = false) {
       <div class="form-group">
         <label class="label" for="edit-prod-price">السعر *</label>
         <div class="input-with-suffix">
-          <input id="edit-prod-price" type="number" class="input" step="0.001" min="0" value="${prod?.price ?? ''}" required />
+          <input id="edit-prod-price" type="number" class="input" step="0.1" min="0" value="${prod?.price ?? ''}" required />
           <span class="input-suffix">ر.ع</span>
         </div>
       </div>

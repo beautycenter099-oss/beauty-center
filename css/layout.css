@@ -92,6 +92,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: row-reverse; /* icon on left visually (RTL end) */
+  justify-content: flex-end;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-6);
   color: rgba(250, 246, 241, 0.6);

@@ -145,7 +145,7 @@ function openOrderDrawer(order) {
     : '<span style="color:var(--text-light)">—</span>';
 
   const lineItems = items.map(i => {
-    const lineTotal = (Number(i.unit_price || 0) * (i.quantity || 1)).toFixed(3);
+    const lineTotal = (Number(i.unit_price || 0) * (i.quantity || 1)).toFixed(1);
     return `
       <tr>
         <td>${escHtml(i.products?.name || '?')}</td>

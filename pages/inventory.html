@@ -1,0 +1,67 @@
+<div class="page-header">
+  <div>
+    <h1 class="page-header-title">المخزون وإضافة المنتجات</h1>
+    <p class="page-header-sub">إضافة منتجات جديدة أو تحديث كميات المنتجات الحالية</p>
+  </div>
+</div>
+
+<div class="settings-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--space-4); align-items: start;">
+
+  <!-- بطاقة إضافة منتج جديد -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">إضافة منتج جديد</h3>
+    </div>
+    <div class="card-body">
+      <form id="new-product-form" class="edit-form">
+        <div class="form-group">
+          <label class="label" for="new-prod-name">اسم المنتج *</label>
+          <input id="new-prod-name" type="text" class="input" placeholder="مثال: شامبو كبير" required />
+        </div>
+        <div class="form-group">
+          <label class="label" for="new-prod-price">السعر *</label>
+          <div class="input-with-suffix">
+            <input id="new-prod-price" type="number" class="input" step="0.1" min="0" placeholder="5" required />
+            <span class="input-suffix">ر.ع</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="label" for="new-prod-stock">الكمية (المخزون)</label>
+          <input id="new-prod-stock" type="number" class="input" step="1" min="0" placeholder="30" />
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: var(--space-3)">إضافة المنتج</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- بطاقة تحديث كمية منتج حالي -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">إضافة كمية لمنتج حالي</h3>
+    </div>
+    <div class="card-body">
+      <form id="update-stock-form" class="edit-form">
+        <div class="form-group">
+          <label class="label" for="existing-prod-select">اختر المنتج *</label>
+          <select id="existing-prod-select" class="input" required>
+            <option value="">جاري التحميل...</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="label" for="add-stock-qty">الكمية المضافة *</label>
+          <input id="add-stock-qty" type="number" class="input" step="1" min="1" placeholder="مثال: 10" required />
+          <div class="settings-hint">سيتم إضافة هذا الرقم إلى المخزون الحالي للمنتج.</div>
+        </div>
+        <div class="form-group">
+          <label class="label" for="update-prod-price">تحديث السعر (اختياري)</label>
+          <div class="input-with-suffix">
+            <input id="update-prod-price" type="number" class="input" step="0.1" min="0" placeholder="اتركه فارغاً لعدم التغيير" />
+            <span class="input-suffix">ر.ع</span>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: var(--space-3)">إضافة الكمية</button>
+      </form>
+    </div>
+  </div>
+
+</div>

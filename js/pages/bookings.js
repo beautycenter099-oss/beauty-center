@@ -152,7 +152,7 @@ function openBookingDrawer(booking) {
 
   const lineItems = items.map(i => {
     const svc   = i.home_services;
-    const total = (Number(i.unit_price || 0) * (i.people_count || 1)).toFixed(3);
+    const total = (Number(i.unit_price || 0) * (i.people_count || 1)).toFixed(1);
     return `
       <tr>
         <td>${escHtml(svc?.name || '?')}</td>

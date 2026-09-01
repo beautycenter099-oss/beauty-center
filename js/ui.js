@@ -25,10 +25,18 @@ export function showToast(message, type = 'info', duration = 3500) {
   toast.innerHTML = `<span>${icons[type] || icons.info}</span><span>${message}</span>`;
   container.appendChild(toast);
 
-  setTimeout(() => {
+  const hideToast = () => {
+    if (!toast.parentElement) return;
     toast.classList.add('hiding');
     toast.addEventListener('animationend', () => toast.remove(), { once: true });
-  }, duration);
+    // Fallback if animationend doesn't fire
+    setTimeout(() => {
+      if (toast.parentElement) toast.remove();
+    }, 500);
+  };
+
+  toast.addEventListener('click', hideToast);
+  setTimeout(hideToast, duration);
 }
 
 // ─── Drawer ────────────────────────────────────────────────────────
@@ -178,7 +186,7 @@ export function formatTimeStr(timeStr) {
  */
 export function formatCurrency(amount, currency = 'ر.ع') {
   if (amount == null) return '—';
-  return `${Number(amount).toFixed(3)} ${currency}`;
+  return `${Number(amount).toFixed(1)} ${currency}`;
 }
 
 /**
