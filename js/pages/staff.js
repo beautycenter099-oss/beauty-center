@@ -46,12 +46,12 @@ function buildStaffCard(s) {
           <div class="staff-avatar">${escHtml(initials)}</div>
           <div>
             <div class="staff-name">${escHtml(s.name)}</div>
-            <div class="staff-phone" dir="ltr">${escHtml(s.phone || '—')}</div>
+            <div class="staff-phone" dir="ltr">${escHtml(s.phone || '—')} ${s.username ? `· 👤 <span style="color:var(--accent-gold-hover)">${escHtml(s.username)}</span>` : ''}</div>
           </div>
         </div>
         <div class="staff-card-actions">
           <span class="badge ${s.active ? 'badge-success' : 'badge-neutral'}">${s.active ? 'نشط' : 'غير نشط'}</span>
-          <button class="btn btn-ghost btn-sm edit-staff-btn" data-id="${s.id}">تعديل</button>
+          <button class="btn btn-ghost btn-sm edit-staff-btn" data-id="${s.id}">تعديل الحساب</button>
           <svg class="staff-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <polyline points="6 9 12 15 18 9"/>
           </svg>
@@ -275,18 +275,33 @@ async function addDayOff(staffId) {
 
 function openStaffDrawer(staff) {
   const isNew = !staff;
-  setDrawerHeader(isNew ? 'موظف جديد' : 'تعديل الموظف', isNew ? '' : staff.name);
+  setDrawerHeader(isNew ? 'إضافة حساب موظف جديد' : 'تعديل حساب الموظف', isNew ? '' : staff.name);
 
   const html = `
     <form class="edit-form" id="staff-edit-form">
       <div class="form-group">
         <label class="label" for="edit-staff-name">الاسم الكامل *</label>
-        <input id="edit-staff-name" type="text" class="input" value="${escHtml(staff?.name || '')}" required />
+        <input id="edit-staff-name" type="text" class="input" value="${escHtml(staff?.name || '')}" placeholder="مثال: سارة أحمد" required />
       </div>
       <div class="form-group">
         <label class="label" for="edit-staff-phone">رقم الهاتف</label>
         <input id="edit-staff-phone" type="text" class="input" dir="ltr" value="${escHtml(staff?.phone || '')}" placeholder="مثال: +968 9XXX XXXX" />
       </div>
+      
+      <div style="border-top:1px dashed var(--border-color);margin:1.25rem 0;padding-top:1rem">
+        <div style="font-weight:600;font-size:var(--text-sm);color:var(--accent-gold-hover);margin-bottom:0.75rem">
+          🔑 بيانات تسجيل الدخول (حساب الموظف)
+        </div>
+        <div class="form-group">
+          <label class="label" for="edit-staff-username">اسم المستخدم (Username) *</label>
+          <input id="edit-staff-username" type="text" class="input" value="${escHtml(staff?.username || '')}" placeholder="مثال: sara" required dir="ltr" />
+        </div>
+        <div class="form-group">
+          <label class="label" for="edit-staff-password">كلمة المرور (Password) *</label>
+          <input id="edit-staff-password" type="text" class="input" value="${escHtml(staff?.password || '')}" placeholder="أدخل كلمة المرور" required dir="ltr" />
+        </div>
+      </div>
+
       <div class="form-group">
         <label class="label">الحالة</label>
         <label class="toggle-wrapper" style="cursor:pointer">
@@ -306,29 +321,42 @@ function openStaffDrawer(staff) {
   });
 
   const footerHtml = isNew
-    ? `<button class="btn btn-primary" id="drawer-save-btn">إضافة موظف</button>
+    ? `<button class="btn btn-primary" id="drawer-save-btn">إضافة حساب الموظف</button>
        <button class="btn btn-ghost" id="drawer-close-btn">إلغاء</button>`
     : `<button class="btn btn-primary" id="drawer-save-btn">حفظ التغييرات</button>
-       <button class="btn btn-danger btn-sm" id="drawer-delete-btn" style="margin-right:auto">حذف</button>
+       <button class="btn btn-danger btn-sm" id="drawer-delete-btn" style="margin-right:auto">حذف الموظف</button>
        <button class="btn btn-ghost" id="drawer-close-btn">إلغاء</button>`;
 
   setDrawerFooter(footerHtml);
   document.getElementById('drawer-close-btn')?.addEventListener('click', closeDrawer);
 
   document.getElementById('drawer-save-btn')?.addEventListener('click', async () => {
-    const name   = document.getElementById('edit-staff-name')?.value.trim();
-    const phone  = document.getElementById('edit-staff-phone')?.value.trim();
-    const active = document.getElementById('edit-staff-active')?.checked;
+    const name     = document.getElementById('edit-staff-name')?.value.trim();
+    const phone    = document.getElementById('edit-staff-phone')?.value.trim();
+    const username = document.getElementById('edit-staff-username')?.value.trim();
+    const password = document.getElementById('edit-staff-password')?.value.trim();
+    const active   = document.getElementById('edit-staff-active')?.checked;
 
     if (!name) { showToast('الاسم مطلوب', 'error'); return; }
+    if (!username) { showToast('اسم المستخدم مطلوب', 'error'); return; }
+    if (!password) { showToast('كلمة المرور مطلوبة', 'error'); return; }
+
+    const payload = {
+      name,
+      phone: phone || null,
+      username,
+      password,
+      role: 'staff',
+      active
+    };
 
     try {
       if (isNew) {
-        await supabasePost('staff', { name, phone: phone || null, active });
-        showToast('تمت إضافة الموظف', 'success');
+        await supabasePost('staff', payload);
+        showToast('تمت إضافة حساب الموظف بنجاح 👤', 'success');
       } else {
-        await supabasePatch('staff', `id=eq.${staff.id}`, { name, phone: phone || null, active });
-        showToast('تم تحديث بيانات الموظف', 'success');
+        await supabasePatch('staff', `id=eq.${staff.id}`, payload);
+        showToast('تم تحديث حساب الموظف وكلمة المرور 🔑', 'success');
       }
       closeDrawer();
       await loadStaff();

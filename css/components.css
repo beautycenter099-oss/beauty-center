@@ -604,3 +604,188 @@ table.data-table {
   transition: color var(--transition-fast);
 }
 .map-link:hover { color: var(--accent-gold); }
+
+/* ─── Page Tabs ─── */
+.page-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid var(--border);
+  margin-bottom: var(--space-6);
+}
+
+.page-tab {
+  padding: var(--space-3) var(--space-6);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  color: var(--text-light);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -2px;
+  transition: all var(--transition-fast);
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.page-tab.active {
+  color: var(--accent-gold-hover);
+  border-bottom-color: var(--accent-gold);
+}
+
+.page-tab:hover:not(.active) {
+  color: var(--text-mid);
+  background: var(--warm-beige);
+}
+
+.tab-count {
+  font-size: 11px;
+  background: var(--warm-beige-deep);
+  color: var(--text-mid);
+  padding: 1px 7px;
+  border-radius: var(--radius-full);
+  font-weight: var(--font-semibold);
+}
+
+.page-tab.active .tab-count {
+  background: var(--accent-gold-light);
+  color: var(--accent-gold-hover);
+}
+
+.tab-panel {
+  display: none;
+}
+.tab-panel.active {
+  display: block;
+}
+
+/* ─── Searchable Dropdown (Combobox) ─── */
+.custom-searchable-select {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+}
+
+.searchable-select-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-3) var(--space-4);
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  font-size: var(--text-sm);
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  cursor: pointer;
+  text-align: right;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.searchable-select-trigger:focus,
+.custom-searchable-select.open .searchable-select-trigger {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 3px rgba(196, 151, 90, 0.15);
+  outline: none;
+}
+
+.searchable-select-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.searchable-select-arrow {
+  margin-right: var(--space-2);
+  color: var(--text-mid);
+  transition: transform var(--transition-fast);
+  font-size: 0.8rem;
+}
+
+.custom-searchable-select.open .searchable-select-arrow {
+  transform: rotate(180deg);
+}
+
+.searchable-select-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+  z-index: 500;
+  max-height: 260px;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+.custom-searchable-select.open .searchable-select-dropdown {
+  display: flex;
+}
+
+.searchable-select-search-wrapper {
+  padding: var(--space-2);
+  border-bottom: 1px solid var(--border-light);
+  background: var(--warm-beige);
+}
+
+.searchable-select-input {
+  width: 100%;
+  padding: var(--space-2) var(--space-3);
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: var(--text-xs);
+  font-family: var(--font-body);
+  color: var(--text-dark);
+  outline: none;
+}
+
+.searchable-select-input:focus {
+  border-color: var(--accent-gold);
+}
+
+.searchable-select-options {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: var(--space-1) 0;
+}
+
+.searchable-option-item {
+  padding: var(--space-2) var(--space-4);
+  font-size: var(--text-sm);
+  color: var(--text-dark);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.searchable-option-item:hover,
+.searchable-option-item.highlighted {
+  background: var(--warm-beige);
+  color: var(--accent-gold-hover);
+}
+
+.searchable-option-item.selected {
+  background: var(--accent-gold-light);
+  color: var(--accent-gold-hover);
+  font-weight: var(--font-semibold);
+}
+
+.searchable-option-item.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.searchable-select-empty {
+  padding: var(--space-4);
+  font-size: var(--text-xs);
+  color: var(--text-light);
+  text-align: center;
+}

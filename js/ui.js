@@ -62,6 +62,7 @@ export function openDrawer(html) {
   drawerEl.classList.add('open');
   scrimEl?.classList.add('open');
   document.body.style.overflow = 'hidden';
+  setTimeout(() => initAllSearchableSelects(drawerEl), 20);
 }
 
 /**
@@ -288,3 +289,183 @@ export function exportCSV(filename, rows) {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
+
+// ─── Searchable Dropdown (Select) Component ──────────────────────────
+
+/**
+ * Convert any HTML <select> element into a searchable dropdown component.
+ * @param {HTMLSelectElement|string} target - Select element or CSS selector.
+ * @returns {HTMLElement|null} - The custom container wrapper.
+ */
+export function makeSearchableSelect(target) {
+  const selectEl = typeof target === 'string' ? document.querySelector(target) : target;
+  if (!selectEl || selectEl.tagName !== 'SELECT') return null;
+
+  // If already initialized, update options & label
+  if (selectEl._searchableSelectContainer) {
+    updateSearchableSelectOptions(selectEl);
+    return selectEl._searchableSelectContainer;
+  }
+
+  // Hide original select element visually while keeping it active in DOM & form
+  selectEl.style.display = 'none';
+
+  // Create custom component container
+  const container = document.createElement('div');
+  container.className = 'custom-searchable-select';
+  if (selectEl.style.width) {
+    container.style.width = selectEl.style.width;
+  }
+
+  const trigger = document.createElement('button');
+  trigger.type = 'button';
+  trigger.className = 'searchable-select-trigger';
+
+  const labelSpan = document.createElement('span');
+  labelSpan.className = 'searchable-select-label';
+
+  const arrowSpan = document.createElement('span');
+  arrowSpan.className = 'searchable-select-arrow';
+  arrowSpan.textContent = '▾';
+
+  trigger.appendChild(labelSpan);
+  trigger.appendChild(arrowSpan);
+
+  const dropdown = document.createElement('div');
+  dropdown.className = 'searchable-select-dropdown';
+
+  const searchWrapper = document.createElement('div');
+  searchWrapper.className = 'searchable-select-search-wrapper';
+
+  const searchInput = document.createElement('input');
+  searchInput.type = 'text';
+  searchInput.className = 'searchable-select-input';
+  searchInput.placeholder = '🔍 بحث...';
+
+  searchWrapper.appendChild(searchInput);
+
+  const optionsContainer = document.createElement('div');
+  optionsContainer.className = 'searchable-select-options';
+
+  dropdown.appendChild(searchWrapper);
+  dropdown.appendChild(optionsContainer);
+
+  container.appendChild(trigger);
+  container.appendChild(dropdown);
+
+  // Insert wrapper after selectEl
+  selectEl.parentNode.insertBefore(container, selectEl.nextSibling);
+  selectEl._searchableSelectContainer = container;
+
+  // Sync state & options
+  const syncLabelAndOptions = () => {
+    optionsContainer.innerHTML = '';
+    const query = searchInput.value.trim().toLowerCase();
+    const selectedOpt = selectEl.options[selectEl.selectedIndex];
+    labelSpan.textContent = selectedOpt ? selectedOpt.textContent : '-- اختر --';
+
+    let matchCount = 0;
+    Array.from(selectEl.options).forEach((opt, idx) => {
+      const text = opt.textContent;
+      const val = opt.value;
+      if (query && !text.toLowerCase().includes(query)) return;
+
+      matchCount++;
+      const item = document.createElement('div');
+      item.className = 'searchable-option-item' + (idx === selectEl.selectedIndex ? ' selected' : '');
+      item.textContent = text;
+      if (opt.disabled) item.classList.add('disabled');
+
+      item.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (opt.disabled) return;
+        selectEl.selectedIndex = idx;
+        selectEl.value = val;
+        selectEl.dispatchEvent(new Event('change', { bubbles: true }));
+        syncLabelAndOptions();
+        closeMenu();
+      });
+
+      optionsContainer.appendChild(item);
+    });
+
+    if (matchCount === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'searchable-select-empty';
+      empty.textContent = 'لا توجد نتائج مطابقة';
+      optionsContainer.appendChild(empty);
+    }
+  };
+
+  const openMenu = () => {
+    document.querySelectorAll('.custom-searchable-select.open').forEach(el => {
+      if (el !== container) el.classList.remove('open');
+    });
+    container.classList.add('open');
+    searchInput.value = '';
+    syncLabelAndOptions();
+    setTimeout(() => searchInput.focus(), 50);
+  };
+
+  const closeMenu = () => {
+    container.classList.remove('open');
+  };
+
+  trigger.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (container.classList.contains('open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
+  });
+
+  searchInput.addEventListener('input', () => {
+    syncLabelAndOptions();
+  });
+
+  searchInput.addEventListener('click', (e) => e.stopPropagation());
+
+  // Close dropdown on click outside
+  document.addEventListener('click', (e) => {
+    if (!container.contains(e.target)) {
+      closeMenu();
+    }
+  });
+
+  // Sync when value is programmatically changed on selectEl
+  selectEl.addEventListener('change', () => {
+    const selectedOpt = selectEl.options[selectEl.selectedIndex];
+    if (labelSpan) labelSpan.textContent = selectedOpt ? selectedOpt.textContent : '-- اختر --';
+  });
+
+  // Observe option mutations on selectEl
+  const observer = new MutationObserver(() => {
+    syncLabelAndOptions();
+  });
+  observer.observe(selectEl, { childList: true, subtree: true, characterData: true });
+
+  syncLabelAndOptions();
+  return container;
+}
+
+function updateSearchableSelectOptions(selectEl) {
+  const container = selectEl._searchableSelectContainer;
+  if (!container) return;
+  const labelSpan = container.querySelector('.searchable-select-label');
+  const selectedOpt = selectEl.options[selectEl.selectedIndex];
+  if (labelSpan) labelSpan.textContent = selectedOpt ? selectedOpt.textContent : '-- اختر --';
+}
+
+/**
+ * Initialize all select elements within a container to be searchable.
+ * @param {HTMLElement|Document} [container=document]
+ */
+export function initAllSearchableSelects(container = document) {
+  const root = container || document;
+  const selects = root.querySelectorAll('select');
+  selects.forEach(select => {
+    makeSearchableSelect(select);
+  });
+}
+

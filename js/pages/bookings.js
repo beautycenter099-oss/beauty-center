@@ -7,21 +7,38 @@ import {
 
 let allBookings = [];
 let selectedBookingId = null;
+let activeTab = 'home'; // 'home' or 'center'
 
 export async function init() {
+  bindTabs();
   await loadBookings();
   bindFilters();
   document.getElementById('export-bookings-btn')?.addEventListener('click', exportBookings);
 }
 
+// ─── Tabs ──────────────────────────────────────────────────────────
+
+function bindTabs() {
+  document.querySelectorAll('.page-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      activeTab = tab.dataset.tab;
+      document.getElementById(`panel-${activeTab}`)?.classList.add('active');
+      applyFilters();
+    });
+  });
+}
+
 // ─── Load & Render ──────────────────────────────────────────────────
 
 async function loadBookings() {
-  const tbody = document.getElementById('bookings-tbody');
-  const countEl = document.getElementById('bookings-count');
-  if (!tbody) return;
+  const homeTbody = document.getElementById('home-tbody');
+  const centerTbody = document.getElementById('center-tbody');
 
-  tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:3rem"><div class="spinner" style="margin:auto"></div></td></tr>`;
+  if (homeTbody) homeTbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:3rem"><div class="spinner" style="margin:auto"></div></td></tr>`;
+  if (centerTbody) centerTbody.innerHTML = `<tr><td colspan="8" style="text-align:center;padding:3rem"><div class="spinner" style="margin:auto"></div></td></tr>`;
 
   try {
     allBookings = await supabaseGet(
@@ -29,14 +46,21 @@ async function loadBookings() {
       'select=*,customers(id,name,phone,whatsapp_id,default_location),home_booking_items(*,home_services(id,name,price,duration_minutes))&order=booking_date.desc,start_time_minutes.asc'
     );
 
-    renderTable(allBookings, tbody, countEl);
+    applyFilters();
   } catch (err) {
     console.error('Bookings load error:', err);
-    tbody.innerHTML = `<tr><td colspan="8" style="color:var(--danger);padding:2rem;text-align:center">فشل تحميل الحجوزات: ${escHtml(err.message)}</td></tr>`;
+    const errHtml = `<tr><td colspan="8" style="color:var(--danger);padding:2rem;text-align:center">فشل تحميل الحجوزات: ${escHtml(err.message)}</td></tr>`;
+    if (homeTbody) homeTbody.innerHTML = errHtml;
+    if (centerTbody) centerTbody.innerHTML = errHtml;
   }
 }
 
-function renderTable(bookings, tbody, countEl) {
+function isCenterBooking(b) {
+  const type = (b.booking_type || b.type || b.location_type || '').toLowerCase();
+  return type === 'center';
+}
+
+function renderTable(bookings, tbody, countEl, emptyMsg) {
   if (countEl) countEl.textContent = `${bookings.length} حجز`;
 
   if (!bookings.length) {
@@ -44,7 +68,7 @@ function renderTable(bookings, tbody, countEl) {
       <tr><td colspan="8">
         <div class="empty-state">
           <div class="empty-state-icon">📅</div>
-          <div class="empty-state-title">لا توجد حجوزات</div>
+          <div class="empty-state-title">${emptyMsg}</div>
           <div class="empty-state-text">جرّب تغيير خيارات التصفية</div>
         </div>
       </td></tr>`;
@@ -79,7 +103,6 @@ function renderTable(bookings, tbody, countEl) {
       </tr>`;
   }).join('');
 
-  // Row click → drawer
   tbody.querySelectorAll('tr[data-id]').forEach(row => {
     row.addEventListener('click', () => {
       const id = Number(row.dataset.id);
@@ -97,23 +120,6 @@ function bindFilters() {
   const dateToInput   = document.getElementById('filter-date-to');
   const clearBtn      = document.getElementById('filter-clear');
 
-  const applyFilters = () => {
-    const status   = statusFilter?.value || '';
-    const dateFrom = dateFromInput?.value || '';
-    const dateTo   = dateToInput?.value || '';
-
-    const filtered = allBookings.filter(b => {
-      if (status && b.status !== status) return false;
-      if (dateFrom && b.booking_date < dateFrom) return false;
-      if (dateTo   && b.booking_date > dateTo)   return false;
-      return true;
-    });
-
-    const tbody   = document.getElementById('bookings-tbody');
-    const countEl = document.getElementById('bookings-count');
-    renderTable(filtered, tbody, countEl);
-  };
-
   statusFilter?.addEventListener('change', applyFilters);
   dateFromInput?.addEventListener('change', applyFilters);
   dateToInput?.addEventListener('change', applyFilters);
@@ -122,8 +128,47 @@ function bindFilters() {
     if (statusFilter)  statusFilter.value  = '';
     if (dateFromInput) dateFromInput.value = '';
     if (dateToInput)   dateToInput.value   = '';
-    renderTable(allBookings, document.getElementById('bookings-tbody'), document.getElementById('bookings-count'));
+    applyFilters();
   });
+}
+
+function applyFilters() {
+  const statusFilter  = document.getElementById('filter-status');
+  const dateFromInput = document.getElementById('filter-date-from');
+  const dateToInput   = document.getElementById('filter-date-to');
+
+  const status   = statusFilter?.value || '';
+  const dateFrom = dateFromInput?.value || '';
+  const dateTo   = dateToInput?.value || '';
+
+  const filteredAll = allBookings.filter(b => {
+    if (status && b.status !== status) return false;
+    if (dateFrom && b.booking_date < dateFrom) return false;
+    if (dateTo   && b.booking_date > dateTo)   return false;
+    return true;
+  });
+
+  const homeBookings = filteredAll.filter(b => !isCenterBooking(b));
+  const centerBookings = filteredAll.filter(b => isCenterBooking(b));
+
+  const homeTbody = document.getElementById('home-tbody');
+  const centerTbody = document.getElementById('center-tbody');
+
+  const homeCountEl = document.getElementById('home-count');
+  const centerCountEl = document.getElementById('center-count');
+  const bookingsCountEl = document.getElementById('bookings-count');
+
+  if (homeCountEl) homeCountEl.textContent = homeBookings.length;
+  if (centerCountEl) centerCountEl.textContent = centerBookings.length;
+
+  if (activeTab === 'home') {
+    if (bookingsCountEl) bookingsCountEl.textContent = `${homeBookings.length} حجز منزلي`;
+  } else {
+    if (bookingsCountEl) bookingsCountEl.textContent = `${centerBookings.length} حجز في المركز`;
+  }
+
+  if (homeTbody) renderTable(homeBookings, homeTbody, null, 'لا توجد حجوزات منزلية');
+  if (centerTbody) renderTable(centerBookings, centerTbody, null, 'لا توجد حجوزات بالمركز');
 }
 
 // ─── Booking Drawer ────────────────────────────────────────────────
@@ -131,16 +176,16 @@ function bindFilters() {
 function openBookingDrawer(booking) {
   selectedBookingId = booking.id;
 
-  // Highlight selected row
-  document.querySelectorAll('#bookings-tbody tr').forEach(r => {
+  document.querySelectorAll('tr[data-id]').forEach(r => {
     r.classList.toggle('selected', Number(r.dataset.id) === booking.id);
   });
 
   const customer = booking.customers;
   const items    = booking.home_booking_items || [];
   const code     = booking.booking_code || '#' + booking.id;
+  const isCenter = isCenterBooking(booking);
 
-  setDrawerHeader(code, `حجز منزلي · ${formatDate(booking.booking_date)}`);
+  setDrawerHeader(code, `${isCenter ? 'حجز بالمركز' : 'حجز منزلي'} · ${formatDate(booking.booking_date)}`);
 
   const timeStr = booking.start_time_minutes != null
     ? `${formatMinutes(booking.start_time_minutes)} – ${formatMinutes(booking.end_time_minutes)}`
@@ -161,6 +206,10 @@ function openBookingDrawer(booking) {
         <td class="td-total">${formatCurrency(total)}</td>
       </tr>`;
   }).join('');
+
+  const typeBadge = isCenter
+    ? `<span class="badge badge-info">🏢 بالمركز</span>`
+    : `<span class="badge badge-gold">🏠 منزلي</span>`;
 
   const html = `
     <!-- بيانات العميل -->
@@ -183,6 +232,10 @@ function openBookingDrawer(booking) {
     <!-- تفاصيل الحجز -->
     <div class="drawer-section">
       <div class="drawer-section-title">تفاصيل الحجز</div>
+      <div class="drawer-field">
+        <span class="drawer-field-label">نوع الحجز</span>
+        <span class="drawer-field-value">${typeBadge}</span>
+      </div>
       <div class="drawer-field">
         <span class="drawer-field-label">التاريخ</span>
         <span class="drawer-field-value">${formatDate(booking.booking_date)}</span>
@@ -225,7 +278,6 @@ function openBookingDrawer(booking) {
 
   openDrawer(html);
 
-  // Footer actions
   const canComplete = booking.status === 'confirmed';
   const canCancel   = booking.status === 'confirmed';
   const canMarkPaid = booking.payment_status === 'unpaid' && booking.status !== 'cancelled';
@@ -272,6 +324,7 @@ async function updateBooking(bookingId, data) {
 function exportBookings() {
   const rows = allBookings.map(b => ({
     Code:         b.booking_code || b.id,
+    Type:         isCenterBooking(b) ? 'Center' : 'Home',
     Customer:     b.customers?.name || b.customers?.phone || '',
     Phone:        b.customers?.phone || '',
     Date:         b.booking_date,
@@ -280,5 +333,5 @@ function exportBookings() {
     Status:       b.status,
     Payment:      b.payment_status,
   }));
-  exportCSV('home_bookings.csv', rows);
+  exportCSV('bookings.csv', rows);
 }

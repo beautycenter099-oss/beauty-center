@@ -1,9 +1,21 @@
 <div class="page-header">
   <div>
-    <h1 class="page-header-title">الحجوزات المنزلية</h1>
-    <p class="page-header-sub">إدارة جميع زيارات الخدمة المنزلية</p>
+    <h1 class="page-header-title">الحجوزات</h1>
+    <p class="page-header-sub">إدارة جميع الحجوزات المنزلية وحجوزات المركز</p>
   </div>
   <button id="export-bookings-btn" class="btn btn-ghost" style="display:none">تصدير</button>
+</div>
+
+<!-- تبويبات الصفحة -->
+<div class="page-tabs">
+  <div class="page-tab active" data-tab="home">
+    🏠 الحجوزات المنزلية
+    <span class="tab-count" id="home-count">—</span>
+  </div>
+  <div class="page-tab" data-tab="center">
+    🏢 حجوزات المركز
+    <span class="tab-count" id="center-count">—</span>
+  </div>
 </div>
 
 <!-- شريط الفلترة -->
@@ -31,27 +43,56 @@
   <span class="bookings-results-count" id="bookings-count"></span>
 </div>
 
-<!-- جدول الحجوزات -->
-<div class="table-wrapper">
-  <table class="data-table">
-    <thead>
-      <tr>
-        <th>الكود</th>
-        <th>العميل</th>
-        <th>التاريخ</th>
-        <th>الوقت</th>
-        <th>الخدمات</th>
-        <th>المبلغ</th>
-        <th>الحالة</th>
-        <th>الدفع</th>
-      </tr>
-    </thead>
-    <tbody id="bookings-tbody">
-      <tr>
-        <td colspan="8" style="text-align:center;padding:3rem">
-          <div class="spinner" style="margin:auto"></div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<!-- لوحة الحجوزات المنزلية -->
+<div class="tab-panel active" id="panel-home">
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>الكود</th>
+          <th>العميل</th>
+          <th>التاريخ</th>
+          <th>الوقت</th>
+          <th>الخدمات</th>
+          <th>المبلغ</th>
+          <th>الحالة</th>
+          <th>الدفع</th>
+        </tr>
+      </thead>
+      <tbody id="home-tbody">
+        <tr>
+          <td colspan="8" style="text-align:center;padding:3rem">
+            <div class="spinner" style="margin:auto"></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- لوحة حجوزات المركز -->
+<div class="tab-panel" id="panel-center">
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>الكود</th>
+          <th>العميل</th>
+          <th>التاريخ</th>
+          <th>الوقت</th>
+          <th>الخدمات</th>
+          <th>المبلغ</th>
+          <th>الحالة</th>
+          <th>الدفع</th>
+        </tr>
+      </thead>
+      <tbody id="center-tbody">
+        <tr>
+          <td colspan="8" style="text-align:center;padding:3rem">
+            <div class="spinner" style="margin:auto"></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

@@ -44,19 +44,31 @@
 
       <form id="login-form" class="login-form" novalidate>
         <div class="form-group">
+          <label class="label" for="username-input">اسم المستخدم</label>
+          <input
+            id="username-input"
+            type="text"
+            class="input"
+            placeholder="أدخل اسم المستخدم (مثال: admin)"
+            autocomplete="username"
+            required
+          />
+        </div>
+
+        <div class="form-group">
           <label class="label" for="password-input">كلمة المرور</label>
           <input
             id="password-input"
             type="password"
             class="input"
-            placeholder="أدخل كلمة مرور المدير"
+            placeholder="أدخل كلمة المرور"
             autocomplete="current-password"
             required
           />
         </div>
 
         <p id="login-error" class="login-error" role="alert" aria-live="polite">
-          كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.
+          اسم المستخدم أو كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.
         </p>
 
         <button type="submit" id="login-submit" class="login-submit">
@@ -83,7 +95,7 @@
       </div>
 
       <nav class="sidebar-nav">
-        <div class="nav-section-label">الرئيسية</div>
+        <div class="nav-section-label" id="section-label-main">الرئيسية</div>
 
         <div class="nav-item active" data-route="#overview" id="nav-overview" tabindex="0" role="button" aria-label="نظرة عامة">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -93,13 +105,13 @@
           نظرة عامة
         </div>
 
-        <div class="nav-item" data-route="#bookings" id="nav-bookings" tabindex="0" role="button" aria-label="الحجوزات المنزلية">
+        <div class="nav-item" data-route="#bookings" id="nav-bookings" tabindex="0" role="button" aria-label="الحجوزات">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <rect x="3" y="4" width="18" height="18" rx="2"/>
             <line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/>
             <line x1="3" y1="10" x2="21" y2="10"/>
           </svg>
-          الحجوزات المنزلية
+          الحجوزات
         </div>
 
         <div class="nav-item" data-route="#customers" id="nav-customers" tabindex="0" role="button" aria-label="العملاء">
@@ -120,25 +132,33 @@
           طلبات التوصيل
         </div>
 
-        <div class="nav-item" data-route="#invoices" id="nav-invoices" tabindex="0" role="button" aria-label="الفواتير">
+        <div class="nav-item" data-route="#create-invoice" id="nav-create-invoice" tabindex="0" role="button" aria-label="إصدار فاتورة">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="12" y1="18" x2="12" y2="12"></line>
+            <line x1="9" y1="15" x2="15" y2="15"></line>
+          </svg>
+          إصدار فاتورة
+        </div>
+
+        <div class="nav-item" data-route="#invoices" id="nav-invoices" tabindex="0" role="button" aria-label="سجل الفواتير">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
             <polyline points="14 2 14 8 20 8"></polyline>
             <line x1="16" y1="13" x2="8" y2="13"></line>
             <line x1="16" y1="17" x2="8" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
           </svg>
-          الفواتير
+          سجل الفواتير
         </div>
 
-        <div class="nav-section-label">الكتالوج</div>
+        <div class="nav-section-label" id="section-label-catalog">الكتالوج والمخزون</div>
 
-        <div class="nav-item" data-route="#catalog" id="nav-catalog" tabindex="0" role="button" aria-label="الخدمات والمنتجات">
+        <div class="nav-item" data-route="#catalog" id="nav-catalog" tabindex="0" role="button" aria-label="الخدمات">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/>
-            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/>
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
           </svg>
-          الخدمات والمنتجات
+          الخدمات
         </div>
 
         <div class="nav-item" data-route="#inventory" id="nav-inventory" tabindex="0" role="button" aria-label="المخزون">
@@ -150,7 +170,7 @@
           المخزون
         </div>
 
-        <div class="nav-section-label">النظام</div>
+        <div class="nav-section-label" id="section-label-system">النظام</div>
 
         <div class="nav-item" data-route="#staff" id="nav-staff" tabindex="0" role="button" aria-label="الموظفون">
           <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -169,7 +189,13 @@
         </div>
       </nav>
 
-      <div class="sidebar-footer">
+      <div class="sidebar-footer" style="display:flex;flex-direction:column;gap:12px;padding:12px;border-top:1px solid var(--border-color)">
+        <div id="user-profile-badge" style="display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:var(--surface-color);border-radius:var(--radius-md);border:1px solid var(--border-color)">
+          <div style="display:flex;flex-direction:column;gap:2px">
+            <span id="user-display-name" style="font-weight:600;font-size:var(--text-sm);color:var(--text-dark)">—</span>
+            <span id="user-display-role" class="badge badge-neutral" style="font-size:10px;width:fit-content">—</span>
+          </div>
+        </div>
         <button class="logout-btn" id="logout-btn" aria-label="تسجيل الخروج">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
