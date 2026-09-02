@@ -1,4 +1,4 @@
-import { DEFAULT_ADMIN_USERNAME, ADMIN_PASSWORD, SESSION_KEY } from './config.js';
+import { SESSION_KEY } from './config.js';
 import { supabaseGet } from './api.js';
 
 /**
@@ -34,7 +34,7 @@ export function isAdmin() {
 }
 
 /**
- * Attempt to log in with a username and password.
+ * Attempt to log in with a username and password against database records.
  * @param {string} username
  * @param {string} password
  * @returns {Promise<{ success: boolean, user?: Object, error?: string }>}
@@ -47,56 +47,44 @@ export async function login(username, password) {
     return { success: false, error: 'يرجى إدخال اسم المستخدم وكلمة المرور' };
   }
 
-  // 1. Check Default Admin Account
-  if (cleanUsername.toLowerCase() === DEFAULT_ADMIN_USERNAME.toLowerCase() && cleanPassword === ADMIN_PASSWORD) {
-    const session = {
-      id: 0,
-      name: 'مدير النظام',
-      username: DEFAULT_ADMIN_USERNAME,
-      role: 'admin'
-    };
-    sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
-    return { success: true, user: session };
-  }
-
-  // 2. Check Staff Table in Supabase
+  // 1. Query Staff Table in Supabase (includes Admin and Staff roles)
   try {
     const query = `select=*&username=eq.${encodeURIComponent(cleanUsername)}&active=eq.true`;
     const rows = await supabaseGet('staff', query);
     
     if (rows && rows.length > 0) {
-      const staff = rows[0];
-      if (staff.password && staff.password === cleanPassword) {
+      const userRow = rows[0];
+      if (userRow.password && userRow.password === cleanPassword) {
         const session = {
-          id: staff.id,
-          name: staff.name,
-          username: staff.username,
-          role: staff.role || 'staff'
+          id: userRow.id,
+          name: userRow.name,
+          username: userRow.username,
+          role: userRow.role || 'staff'
         };
         sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
         return { success: true, user: session };
       }
     }
   } catch (err) {
-    console.warn('Database login error, checking local fallback:', err);
+    console.warn('Database login query failed, checking offline local storage:', err);
   }
 
-  // 3. Fallback: check localStorage staff if offline
+  // 2. Fallback: check localStorage staff if offline
   try {
     const local = localStorage.getItem('bc_staff');
     if (local) {
       const staffList = JSON.parse(local);
-      const staff = staffList.find(s => 
+      const userRow = staffList.find(s => 
         (s.username || '').toLowerCase() === cleanUsername.toLowerCase() && 
         s.password === cleanPassword && 
         s.active !== false
       );
-      if (staff) {
+      if (userRow) {
         const session = {
-          id: staff.id,
-          name: staff.name,
-          username: staff.username,
-          role: staff.role || 'staff'
+          id: userRow.id,
+          name: userRow.name,
+          username: userRow.username,
+          role: userRow.role || 'staff'
         };
         sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
         return { success: true, user: session };
