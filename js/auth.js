@@ -5,9 +5,13 @@ import { supabaseGet } from './api.js';
  * Get the currently logged-in user object.
  * @returns {{ id?: number, name: string, username: string, role: string } | null}
  */
+/**
+ * Get the currently logged-in user object.
+ * @returns {{ id?: number, name: string, username: string, role: string } | null}
+ */
 export function getCurrentUser() {
   try {
-    const raw = sessionStorage.getItem(SESSION_KEY);
+    const raw = localStorage.getItem(SESSION_KEY) || sessionStorage.getItem(SESSION_KEY);
     if (!raw) return null;
     return JSON.parse(raw);
   } catch (err) {
@@ -61,6 +65,7 @@ export async function login(username, password) {
           username: userRow.username,
           role: userRow.role || 'staff'
         };
+        localStorage.setItem(SESSION_KEY, JSON.stringify(session));
         sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
         return { success: true, user: session };
       }
@@ -86,6 +91,7 @@ export async function login(username, password) {
           username: userRow.username,
           role: userRow.role || 'staff'
         };
+        localStorage.setItem(SESSION_KEY, JSON.stringify(session));
         sessionStorage.setItem(SESSION_KEY, JSON.stringify(session));
         return { success: true, user: session };
       }
@@ -101,5 +107,6 @@ export async function login(username, password) {
  * Log out and clear session.
  */
 export function logout() {
+  localStorage.removeItem(SESSION_KEY);
   sessionStorage.removeItem(SESSION_KEY);
 }

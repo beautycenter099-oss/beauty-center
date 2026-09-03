@@ -33,9 +33,9 @@ export async function navigate(hash) {
   let targetHash = hash || defaultRoute;
   let route = ROUTES[targetHash];
 
-  // If route doesn't exist or is admin-only when user is staff, redirect to staff default route
+  // If route doesn't exist or is admin-only when user is staff, redirect to default route
   if (!route || (route.adminOnly && !userIsAdmin)) {
-    if (hash && hash !== defaultRoute) {
+    if (route && route.adminOnly && !userIsAdmin) {
       showToast('عفواً، هذه الصفحة مخصصة لمدير النظام فقط', 'warning');
     }
     targetHash = defaultRoute;
@@ -135,7 +135,9 @@ export function showDashboard(hash) {
   if (systemLabel) systemLabel.style.display = userIsAdmin ? '' : 'none';
 
   const defaultRoute = userIsAdmin ? '#overview' : '#bookings';
-  navigate(hash || window.location.hash || defaultRoute);
+  let targetHash = hash || window.location.hash || defaultRoute;
+  if (targetHash === '#login') targetHash = defaultRoute;
+  navigate(targetHash);
 }
 
 /**
