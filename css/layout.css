@@ -236,7 +236,7 @@ body {
   }
 }
 
-/* ─── Responsive: Mobile ─── */
+/* ─── Responsive: Mobile & Tablet ─── */
 @media (max-width: 768px) {
   #dashboard-view.active {
     display: block; /* Stack on mobile */
@@ -247,9 +247,13 @@ body {
     right: 0;
     top: 0;
     bottom: 0;
-    z-index: 100;
-    transform: translateX(100%); /* hidden off-right */
+    width: 280px;
+    max-width: 85vw;
+    height: 100vh;
+    z-index: 1000;
+    transform: translateX(100%); /* hidden off-right in RTL */
     transition: transform var(--transition-base);
+    box-shadow: none;
   }
 
   .sidebar.open {
@@ -257,19 +261,25 @@ body {
     box-shadow: var(--shadow-xl);
   }
 
+  .sidebar-scrim {
+    z-index: 999;
+  }
+
   .main-area {
     min-height: 100vh;
+    width: 100%;
   }
 
   .topbar {
     padding: 0 var(--space-4);
     position: sticky;
     top: 0;
-    z-index: 10;
+    z-index: 100;
+    height: 56px;
   }
 
   .topbar-title {
-    font-size: var(--text-base);
+    font-size: 1.05rem;
   }
 
   .topbar-date {
@@ -278,9 +288,21 @@ body {
 
   .hamburger {
     display: flex;
+    background: transparent;
+    border: none;
   }
 
   #page-content {
-    padding: var(--space-4);
+    padding: var(--space-3);
+  }
+}
+
+@media (max-width: 480px) {
+  #login-view {
+    padding: var(--space-3);
+  }
+  .login-card {
+    padding: var(--space-5) var(--space-4);
+    width: 100%;
   }
 }

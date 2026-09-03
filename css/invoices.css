@@ -87,7 +87,23 @@
 
 @media (max-width: 768px) {
   .invoice-item-row-form {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+  }
+
+  .invoices-filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .invoices-filter-bar .filter-group {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .invoices-filter-bar .input {
+    width: 100% !important;
   }
 }
 

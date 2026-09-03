@@ -132,3 +132,33 @@
   color: var(--text-light);
   font-size: var(--text-sm);
 }
+
+/* ─── Responsive: Mobile & Tablet ─── */
+@media (max-width: 768px) {
+  .customers-search-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .customers-search-bar .search-wrapper {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .customers-count {
+    margin-left: 0;
+    text-align: right;
+  }
+
+  .customer-profile-header {
+    flex-direction: column;
+    text-align: center;
+    padding: var(--space-4);
+  }
+
+  .history-tabs {
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}

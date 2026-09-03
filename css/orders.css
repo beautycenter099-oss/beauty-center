@@ -78,3 +78,23 @@
   font-size: var(--text-2xl);
   color: var(--accent-gold-hover);
 }
+
+/* ─── Responsive: Mobile & Tablet ─── */
+@media (max-width: 768px) {
+  .orders-filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .orders-filter-bar .filter-group {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .orders-results-count {
+    margin-left: 0;
+    text-align: right;
+  }
+}

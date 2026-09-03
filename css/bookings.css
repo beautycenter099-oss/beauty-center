@@ -96,3 +96,30 @@
   font-weight: var(--font-semibold);
   color: var(--accent-gold-hover);
 }
+
+/* ─── Responsive: Mobile & Tablet ─── */
+@media (max-width: 768px) {
+  .bookings-filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-3);
+  }
+
+  .bookings-filter-bar .filter-group,
+  .date-range-inputs {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-2);
+  }
+
+  .date-range-inputs .input,
+  .status-select {
+    width: 100% !important;
+  }
+
+  .bookings-results-count {
+    margin-left: 0;
+    text-align: right;
+  }
+}

@@ -234,3 +234,30 @@
   flex-wrap: wrap;
   gap: var(--space-4);
 }
+
+/* ─── Responsive: Mobile & Tablet ─── */
+@media (max-width: 768px) {
+  .staff-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-3);
+  }
+
+  .staff-schedule {
+    padding: var(--space-3);
+    overflow-x: auto;
+  }
+
+  .schedule-grid {
+    min-width: 500px; /* Allow smooth horizontal scroll on small phones */
+  }
+
+  .add-day-off-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .add-day-off-row .input {
+    width: 100%;
+  }
+}

@@ -122,7 +122,7 @@ export function showDashboard(hash) {
   }
 
   // Toggle admin-only sidebar links
-  const adminLinks = ['#nav-overview', '#nav-invoices', '#nav-staff', '#nav-settings'];
+  const adminLinks = ['#nav-overview', '#nav-staff', '#nav-settings'];
   adminLinks.forEach(id => {
     const el = document.getElementById(id.replace('#', ''));
     if (el) el.style.display = userIsAdmin ? '' : 'none';
@@ -183,10 +183,28 @@ export function initRouter() {
     }
   });
 
+  // Mobile sidebar toggle handlers
+  const hamburgerBtn = document.getElementById('hamburger-btn');
+  const sidebarScrim = document.getElementById('sidebar-scrim');
+  const sidebar = document.getElementById('sidebar');
+
+  const closeMobileSidebar = () => {
+    sidebar?.classList.remove('open');
+    sidebarScrim?.classList.remove('open');
+  };
+
+  hamburgerBtn?.addEventListener('click', () => {
+    sidebar?.classList.toggle('open');
+    sidebarScrim?.classList.toggle('open');
+  });
+
+  sidebarScrim?.addEventListener('click', closeMobileSidebar);
+
   // Bind logout button
   document.getElementById('logout-btn')?.addEventListener('click', () => {
     logout();
     showLogin();
+    closeMobileSidebar();
     showToast('تم تسجيل الخروج بنجاح 👋', 'info');
   });
 
@@ -195,6 +213,7 @@ export function initRouter() {
     item.addEventListener('click', () => {
       const route = item.dataset.route;
       if (route) navigate(route);
+      closeMobileSidebar();
     });
   });
 
