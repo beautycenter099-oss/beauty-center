@@ -13,19 +13,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- CSS -->
-  <link rel="stylesheet" href="css/tokens.css" />
-  <link rel="stylesheet" href="css/reset.css" />
-  <link rel="stylesheet" href="css/layout.css" />
-  <link rel="stylesheet" href="css/components.css" />
-  <link rel="stylesheet" href="css/login.css" />
-  <link rel="stylesheet" href="css/overview.css" />
-  <link rel="stylesheet" href="css/bookings.css" />
-  <link rel="stylesheet" href="css/customers.css" />
-  <link rel="stylesheet" href="css/orders.css" />
-  <link rel="stylesheet" href="css/catalog.css" />
-  <link rel="stylesheet" href="css/invoices.css" />
-  <link rel="stylesheet" href="css/settings.css" />
-  <link rel="stylesheet" href="css/staff.css" />
+  <link rel="stylesheet" href="css/tokens.css?v=2.0.0" />
+  <link rel="stylesheet" href="css/reset.css?v=2.0.0" />
+  <link rel="stylesheet" href="css/layout.css?v=2.0.0" />
+  <link rel="stylesheet" href="css/components.css?v=2.0.0" />
+  <link rel="stylesheet" href="css/login.css?v=2.0.0" />
+  <link rel="stylesheet" href="css/overview.css?v=2.0.0" />
+  <link rel="stylesheet" href="css/bookings.css?v=2.0.0" />
+  <link rel="stylesheet" href="css/customers.css?v=2.0.0" />
+  <link rel="stylesheet" href="css/orders.css?v=2.0.0" />
+  <link rel="stylesheet" href="css/catalog.css?v=2.0.0" />
+  <link rel="stylesheet" href="css/invoices.css?v=2.0.0" />
+  <link rel="stylesheet" href="css/settings.css?v=2.0.0" />
+  <link rel="stylesheet" href="css/staff.css?v=2.0.0" />
 </head>
 <body>
 
@@ -252,12 +252,11 @@
 
 
   <!-- ════════════════════════════════════════
-       JavaScript (وحدات ES)
+       JavaScript (وحدات ES) v2.0.0
   ════════════════════════════════════════ -->
   <script type="module">
-    import { isAuthenticated, login, logout } from './js/auth.js';
-    import { initRouter, showLogin, showDashboard, navigate } from './js/router.js';
-    import { closeDrawer } from './js/ui.js';
+    import { initRouter } from './js/router.js?v=2.0.0';
+    import { closeDrawer } from './js/ui.js?v=2.0.0';
 
     // ─── تاريخ الشريط العلوي ─────────────────────────────
     const topbarDate = document.getElementById('topbar-date');
@@ -267,68 +266,12 @@
       });
     }
 
-    // ─── نموذج تسجيل الدخول ──────────────────────────────
-    const loginForm  = document.getElementById('login-form');
-    const loginError = document.getElementById('login-error');
-
-    loginForm?.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const password = document.getElementById('password-input').value;
-      if (login(password)) {
-        loginError.classList.remove('visible');
-        showDashboard('#overview');
-      } else {
-        loginError.classList.add('visible');
-        document.getElementById('password-input').select();
-      }
-    });
-
-    // ─── تسجيل الخروج ────────────────────────────────────
-    document.getElementById('logout-btn')?.addEventListener('click', () => {
-      logout();
-      showLogin();
-    });
-
-    // ─── التنقل في الشريط الجانبي ───────────────────────
-    document.querySelectorAll('.nav-item').forEach(item => {
-      item.addEventListener('click', () => {
-        navigate(item.dataset.route);
-        // إغلاق الشريط على الموبايل
-        document.getElementById('sidebar').classList.remove('open');
-        document.getElementById('sidebar-scrim').classList.remove('open');
-      });
-      item.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); item.click(); }
-      });
-    });
-
-    // ─── زر القائمة (موبايل) ─────────────────────────────
-    document.getElementById('hamburger-btn')?.addEventListener('click', () => {
-      const sidebar = document.getElementById('sidebar');
-      const scrim   = document.getElementById('sidebar-scrim');
-      const isOpen  = sidebar.classList.toggle('open');
-      scrim.classList.toggle('open', isOpen);
-    });
-
-    // ─── إغلاق الشريط عند النقر على الظل ─────────────────
-    document.getElementById('sidebar-scrim')?.addEventListener('click', () => {
-      document.getElementById('sidebar').classList.remove('open');
-      document.getElementById('sidebar-scrim').classList.remove('open');
-    });
-
     // ─── إغلاق درج التفاصيل ──────────────────────────────
     document.getElementById('drawer-close-x')?.addEventListener('click', closeDrawer);
     document.getElementById('drawer-scrim')?.addEventListener('click', closeDrawer);
 
-    // ─── تهيئة التوجيه ───────────────────────────────────
+    // ─── تهيئة الموجه والتطبيق ───────────────────────────
     initRouter();
-
-    // ─── المسار الأولي ───────────────────────────────────
-    if (isAuthenticated()) {
-      showDashboard(window.location.hash || '#overview');
-    } else {
-      showLogin();
-    }
   </script>
 
 </body>

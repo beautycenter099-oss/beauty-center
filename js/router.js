@@ -1,18 +1,20 @@
 import { isAuthenticated, isAdmin, getCurrentUser, login, logout } from './auth.js';
 import { initAllSearchableSelects, showToast } from './ui.js';
 
+const APP_VERSION = '2.0.0';
+
 // Map each hash route to a page config
 const ROUTES = {
-  '#overview':       { title: 'نظرة عامة',          template: 'pages/overview.html',  module: () => import('./pages/overview.js'), adminOnly: true },
-  '#bookings':       { title: 'الحجوزات',           template: 'pages/bookings.html',  module: () => import('./pages/bookings.js') },
-  '#customers':      { title: 'العملاء',            template: 'pages/customers.html', module: () => import('./pages/customers.js') },
-  '#orders':         { title: 'طلبات التوصيل',      template: 'pages/orders.html',    module: () => import('./pages/orders.js') },
-  '#create-invoice': { title: 'إصدار فاتورة مبيعات', template: 'pages/invoices.html',  module: () => import('./pages/invoices.js') },
-  '#invoices':       { title: 'سجل الفواتير والمبيعات', template: 'pages/invoices.html', module: () => import('./pages/invoices.js'), adminOnly: true },
-  '#catalog':        { title: 'الخدمات والكتالوج',   template: 'pages/catalog.html',   module: () => import('./pages/catalog.js') },
-  '#inventory':      { title: 'إدارة المخزون',      template: 'pages/inventory.html', module: () => import('./pages/inventory.js') },
-  '#staff':          { title: 'إدارة الموظفين',     template: 'pages/staff.html',     module: () => import('./pages/staff.js'), adminOnly: true },
-  '#settings':       { title: 'إعدادات العمل',      template: 'pages/settings.html',  module: () => import('./pages/settings.js'), adminOnly: true },
+  '#overview':       { title: 'نظرة عامة',          template: `pages/overview.html?v=${APP_VERSION}`,  module: () => import(`./pages/overview.js?v=${APP_VERSION}`), adminOnly: true },
+  '#bookings':       { title: 'الحجوزات',           template: `pages/bookings.html?v=${APP_VERSION}`,  module: () => import(`./pages/bookings.js?v=${APP_VERSION}`) },
+  '#customers':      { title: 'العملاء',            template: `pages/customers.html?v=${APP_VERSION}`, module: () => import(`./pages/customers.js?v=${APP_VERSION}`) },
+  '#orders':         { title: 'طلبات التوصيل',      template: `pages/orders.html?v=${APP_VERSION}`,    module: () => import(`./pages/orders.js?v=${APP_VERSION}`) },
+  '#create-invoice': { title: 'إصدار فاتورة مبيعات', template: `pages/invoices.html?v=${APP_VERSION}`,  module: () => import(`./pages/invoices.js?v=${APP_VERSION}`) },
+  '#invoices':       { title: 'سجل الفواتير والمبيعات', template: `pages/invoices.html?v=${APP_VERSION}`, module: () => import(`./pages/invoices.js?v=${APP_VERSION}`), adminOnly: true },
+  '#catalog':        { title: 'الخدمات والكتالوج',   template: `pages/catalog.html?v=${APP_VERSION}`,   module: () => import(`./pages/catalog.js?v=${APP_VERSION}`) },
+  '#inventory':      { title: 'إدارة المخزون',      template: `pages/inventory.html?v=${APP_VERSION}`, module: () => import(`./pages/inventory.js?v=${APP_VERSION}`) },
+  '#staff':          { title: 'إدارة الموظفين',     template: `pages/staff.html?v=${APP_VERSION}`,     module: () => import(`./pages/staff.js?v=${APP_VERSION}`), adminOnly: true },
+  '#settings':       { title: 'إعدادات العمل',      template: `pages/settings.html?v=${APP_VERSION}`,  module: () => import(`./pages/settings.js?v=${APP_VERSION}`), adminOnly: true },
 };
 
 /**
