@@ -17,6 +17,12 @@ export async function init() {
 
   if (isAdmin()) {
     await refreshData();
+    if (window.location.hash === '#invoices') {
+      const toggleBtn = document.getElementById('btn-toggle-view');
+      if (toggleBtn && toggleBtn.dataset.view === 'create') {
+        toggleBtn.click();
+      }
+    }
   } else {
     // Staff members can only issue new invoices, not query/view invoice history
     await loadProductsAndServices();

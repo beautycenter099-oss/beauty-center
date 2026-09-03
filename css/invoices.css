@@ -2,6 +2,12 @@
    أنماط صفحة الفواتير والمبيعات
    ════════════════════════════════════════ */
 
+.page-header-actions {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+}
+
 .invoices-stats-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -56,6 +62,8 @@
   color: var(--text-primary);
 }
 
+/* ─── شريط الفلترة ───────────────────────────── */
+
 .invoices-filter-bar {
   display: flex;
   flex-wrap: wrap;
@@ -66,6 +74,34 @@
   border-radius: var(--radius-md);
   border: 1px solid var(--border-color);
   margin-bottom: var(--space-6);
+}
+
+.invoices-filter-bar .filter-group {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.invoices-filter-bar .filter-search {
+  flex: 1;
+  min-width: 220px;
+  max-width: 360px;
+}
+
+.invoices-filter-bar .filter-date-input {
+  width: 145px;
+}
+
+.invoices-filter-bar label {
+  font-size: var(--text-sm);
+  color: var(--text-mid);
+  white-space: nowrap;
+}
+
+.invoices-filter-bar .orders-results-count {
+  font-size: var(--text-sm);
+  color: var(--text-light);
+  margin-right: auto; /* RTL: push to end */
 }
 
 /* ─── ستايل إضافة بند الفاتورة ───────────────────────────── */
@@ -80,14 +116,31 @@
 
 .invoice-item-row-form {
   display: grid;
-  grid-template-columns: 110px 1fr 90px 100px auto;
+  grid-template-columns: 130px 1fr 90px 110px auto;
   gap: var(--space-3);
   align-items: end;
+}
+
+.invoice-item-row-form .btn-add-item {
+  height: 42px;
+  width: 100%;
+}
+
+@media (max-width: 1100px) and (min-width: 769px) {
+  .invoice-item-row-form {
+    grid-template-columns: 1fr 1fr;
+  }
+  .invoice-item-row-form .btn-add-item {
+    grid-column: span 2;
+  }
 }
 
 @media (max-width: 768px) {
   .invoice-item-row-form {
     grid-template-columns: 1fr;
+  }
+  .invoice-item-row-form .btn-add-item {
+    grid-column: span 1;
   }
 
   .invoices-filter-bar {
@@ -98,12 +151,30 @@
 
   .invoices-filter-bar .filter-group {
     width: 100%;
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    align-items: center;
   }
 
-  .invoices-filter-bar .input {
+  .invoices-filter-bar .filter-search {
+    max-width: 100%;
+  }
+
+  .invoices-filter-bar .filter-date-input {
     width: 100% !important;
+  }
+
+  .invoices-filter-bar .orders-results-count {
+    margin-right: 0;
+    text-align: right;
+  }
+
+  .stat-card {
+    padding: var(--space-4);
+    gap: var(--space-3);
+  }
+
+  .stat-value {
+    font-size: 1.15rem;
   }
 }
 
@@ -119,6 +190,12 @@
   padding: var(--space-3);
   border-bottom: 1px solid var(--border-color);
   text-align: right;
+  white-space: nowrap;
+}
+
+.invoice-items-table td:nth-child(2) {
+  white-space: normal;
+  min-width: 150px;
 }
 
 .invoice-items-table th {
@@ -186,6 +263,11 @@
   padding: 10px 12px;
   border-bottom: 1px solid #e5e7eb;
   text-align: right;
+  white-space: nowrap;
+}
+
+.printable-invoice-table td:nth-child(3) {
+  white-space: normal;
 }
 
 .printable-invoice-table th {
@@ -199,6 +281,28 @@
   font-size: 1.2rem;
   color: #1e293b;
   border-top: 2px solid #cbd5e1;
+}
+
+@media (max-width: 600px) {
+  .printable-invoice {
+    padding: 1.25rem;
+    border-radius: 8px;
+  }
+
+  .printable-invoice-header {
+    flex-direction: column;
+    gap: var(--space-3);
+    align-items: flex-start;
+  }
+
+  .printable-invoice-num {
+    text-align: right;
+  }
+
+  .printable-invoice-table {
+    display: block;
+    overflow-x: auto;
+  }
 }
 
 /* ─── ستايل صفحة إنشاء الفاتورة المُنظّمة ───────────────── */
@@ -215,9 +319,12 @@
   align-items: start;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 1024px) {
   .create-invoice-grid {
     grid-template-columns: 1fr;
   }
-}
 
+  .create-invoice-sidebar .card {
+    position: static;
+  }
+}

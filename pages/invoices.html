@@ -1,9 +1,9 @@
-<div class="page-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--space-5)">
+<div class="page-header">
   <div>
     <h1 class="page-header-title" id="invoices-header-title">إصدار فاتورة مبيعات جديدة 🧾</h1>
     <p class="page-header-sub" id="invoices-header-sub">قم بإضافة المنتجات والخدمات المطلوبة للتخصيم التلقائي وإصدار الفاتورة</p>
   </div>
-  <div style="display: flex; gap: var(--space-3)">
+  <div class="page-header-actions">
     <button class="btn btn-primary" id="btn-toggle-view" data-view="create">
       📋 عرض جميع الفواتير
     </button>
@@ -167,18 +167,18 @@
 
   <!-- شريط البحث والفلترة -->
   <div class="invoices-filter-bar">
-    <div class="filter-group" style="flex:1;max-width:320px">
+    <div class="filter-group filter-search">
       <input type="text" id="invoice-search" class="input" placeholder="بحث برقم الفاتورة أو اسم العميل..." />
     </div>
 
     <div class="filter-group">
-      <label>من</label>
-      <input type="date" id="invoice-date-from" class="input" style="width:145px" />
+      <label for="invoice-date-from">من</label>
+      <input type="date" id="invoice-date-from" class="input filter-date-input" />
     </div>
 
     <div class="filter-group">
-      <label>إلى</label>
-      <input type="date" id="invoice-date-to" class="input" style="width:145px" />
+      <label for="invoice-date-to">إلى</label>
+      <input type="date" id="invoice-date-to" class="input filter-date-input" />
     </div>
 
     <button id="invoice-filter-clear" class="btn btn-ghost btn-sm">مسح الفلاتر</button>
