@@ -16,8 +16,8 @@
 }
 
 .stat-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background: var(--warm-beige);
+  border: 1px solid var(--border);
   border-radius: var(--radius-lg);
   padding: var(--space-5);
   display: flex;
@@ -50,7 +50,7 @@
 
 .stat-label {
   font-size: var(--text-xs);
-  color: var(--text-muted);
+  color: var(--text-light);
   text-transform: uppercase;
   letter-spacing: 0.5px;
   margin-bottom: 2px;
@@ -59,7 +59,7 @@
 .stat-value {
   font-size: 1.35rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--text-dark);
 }
 
 /* ─── شريط الفلترة ───────────────────────────── */
@@ -69,10 +69,10 @@
   flex-wrap: wrap;
   align-items: center;
   gap: var(--space-3);
-  background: var(--bg-card);
+  background: var(--warm-beige);
   padding: var(--space-4);
   border-radius: var(--radius-md);
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--border);
   margin-bottom: var(--space-6);
 }
 
@@ -107,8 +107,8 @@
 /* ─── ستايل إضافة بند الفاتورة ───────────────────────────── */
 
 .invoice-item-builder {
-  background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  background: var(--warm-beige);
+  border: 1px solid var(--border);
   border-radius: var(--radius-md);
   padding: var(--space-4);
   margin-bottom: var(--space-5);
@@ -178,26 +178,70 @@
     width: 100%;
     flex-direction: row;
     align-items: center;
+    flex-wrap: nowrap;
+  }
+
+  .invoices-filter-bar .filter-group .input {
+    flex: 1;
+    min-width: 0;
   }
 
   .invoices-filter-bar .filter-search {
     max-width: 100%;
     min-width: 0;
+    width: 100%;
   }
 
   .invoices-filter-bar .filter-date-input {
     width: 100% !important;
     flex: 1;
-  }
-
-  .invoices-filter-bar label {
-    min-width: 26px;
-    flex-shrink: 0;
+    min-width: 0;
   }
 
   .invoices-filter-bar .orders-results-count {
     margin-right: 0;
     text-align: right;
+  }
+
+  /* Invoice item form: 2 cols */
+  .invoice-item-row-form {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+  }
+
+  .invoice-item-row-form .btn-add-item {
+    grid-column: span 2;
+    height: 44px;
+  }
+
+  /* Create invoice grid stacks */
+  .create-invoice-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  /* Summary box stacks */
+  .invoice-summary-box {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-2);
+  }
+
+  /* Printable invoice */
+  .printable-invoice {
+    padding: 1rem;
+    border-radius: var(--radius-md);
+  }
+
+  .printable-invoice-header {
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .printable-invoice-table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 
@@ -247,7 +291,7 @@
 .invoice-items-table th,
 .invoice-items-table td {
   padding: var(--space-3);
-  border-bottom: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border);
   text-align: right;
   white-space: nowrap;
 }
@@ -258,9 +302,9 @@
 }
 
 .invoice-items-table th {
-  color: var(--text-muted);
+  color: var(--text-light);
   font-weight: 600;
-  background: rgba(255, 255, 255, 0.02);
+  background: var(--warm-beige-deep);
 }
 
 .invoice-summary-box {

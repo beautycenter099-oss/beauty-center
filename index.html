@@ -218,32 +218,6 @@
 
     <!-- ظل الشريط الجانبي (موبايل) -->
     <div id="sidebar-scrim" class="sidebar-scrim" aria-hidden="true"></div>
-
-    <!-- شريط التنقل السفلي (موبايل) -->
-    <nav class="bottom-nav" id="bottom-nav" aria-label="التنقل السريع">
-      <div class="bottom-nav-items">
-        <div class="bottom-nav-item active" data-route="#overview" id="bnav-overview">
-          <span class="nav-icon-emoji">🏠</span>
-          <span>الرئيسية</span>
-        </div>
-        <div class="bottom-nav-item" data-route="#bookings" id="bnav-bookings">
-          <span class="nav-icon-emoji">📅</span>
-          <span>الحجوزات</span>
-        </div>
-        <div class="bottom-nav-item" data-route="#create-invoice" id="bnav-create-invoice">
-          <span class="nav-icon-emoji">🧾</span>
-          <span>فاتورة</span>
-        </div>
-        <div class="bottom-nav-item" data-route="#customers" id="bnav-customers">
-          <span class="nav-icon-emoji">👥</span>
-          <span>العملاء</span>
-        </div>
-        <div class="bottom-nav-item" data-route="#catalog" id="bnav-catalog">
-          <span class="nav-icon-emoji">💎</span>
-          <span>الكتالوج</span>
-        </div>
-      </div>
-    </nav>
   </div>
 
 
@@ -298,46 +272,6 @@
 
     // ─── تهيئة الموجه والتطبيق ───────────────────────────
     initRouter();
-
-    // ─── شريط التنقل السفلي (موبايل) ─────────────────────
-    (function setupBottomNav() {
-      const bnavItems = document.querySelectorAll('.bottom-nav-item');
-      const sidebarItems = document.querySelectorAll('.nav-item[data-route]');
-
-      function syncBottomNav(route) {
-        bnavItems.forEach(item => {
-          item.classList.toggle('active', item.dataset.route === route);
-        });
-      }
-
-      // Navigate on tap
-      bnavItems.forEach(item => {
-        item.addEventListener('click', () => {
-          const route = item.dataset.route;
-          if (route) {
-            window.location.hash = route.replace('#', '');
-            syncBottomNav(route);
-          }
-        });
-      });
-
-      // Sync when sidebar nav changes
-      sidebarItems.forEach(item => {
-        item.addEventListener('click', () => {
-          syncBottomNav(item.dataset.route);
-        });
-      });
-
-      // Sync on hash change
-      window.addEventListener('hashchange', () => {
-        const hash = '#' + (window.location.hash.replace('#', '') || 'overview');
-        syncBottomNav(hash);
-      });
-
-      // Initial sync
-      const initHash = '#' + (window.location.hash.replace('#', '') || 'overview');
-      syncBottomNav(initHash);
-    })();
   </script>
 
 </body>

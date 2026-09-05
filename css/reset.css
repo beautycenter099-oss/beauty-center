@@ -66,7 +66,7 @@ button {
 }
 
 /* Minimum touch target size for accessibility */
-button, [role="button"], .nav-item, .bottom-nav-item {
+button, [role="button"], .nav-item {
   min-height: 44px;
 }
 
