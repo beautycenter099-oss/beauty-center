@@ -147,3 +147,58 @@
   color: var(--text-mid);
   margin-top: var(--space-2);
 }
+
+/* ─── Responsive: Mobile ─── */
+@media (max-width: 768px) {
+  .overview-welcome {
+    margin-bottom: var(--space-5);
+  }
+
+  .overview-greeting {
+    font-size: var(--text-2xl);
+  }
+
+  .overview-date {
+    font-size: var(--text-sm);
+  }
+
+  .kpi-value {
+    font-size: var(--text-3xl);
+  }
+
+  .kpi-card {
+    padding: var(--space-4);
+    gap: var(--space-2);
+  }
+
+  .recent-card-header {
+    padding: var(--space-4);
+  }
+
+  .recent-table td,
+  .recent-table th {
+    padding: var(--space-2) var(--space-3);
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .overview-greeting {
+    font-size: var(--text-xl);
+  }
+
+  .kpi-value {
+    font-size: var(--text-2xl);
+    letter-spacing: -0.01em;
+  }
+
+  .kpi-label {
+    font-size: 10px;
+  }
+
+  .kpi-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+}

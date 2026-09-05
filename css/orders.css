@@ -89,8 +89,15 @@
 
   .orders-filter-bar .filter-group {
     width: 100%;
-    flex-direction: column;
-    align-items: stretch;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .orders-filter-bar .filter-group select,
+  .orders-filter-bar .filter-group input {
+    flex: 1;
+    width: 100%;
   }
 
   .orders-results-count {

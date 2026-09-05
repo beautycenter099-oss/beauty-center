@@ -10,7 +10,7 @@
 
 .invoices-stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: var(--space-4);
   margin-bottom: var(--space-6);
 }
@@ -101,7 +101,7 @@
 .invoices-filter-bar .orders-results-count {
   font-size: var(--text-sm);
   color: var(--text-light);
-  margin-right: auto; /* RTL: push to end */
+  margin-right: auto;
 }
 
 /* ─── ستايل إضافة بند الفاتورة ───────────────────────────── */
@@ -136,17 +136,42 @@
 }
 
 @media (max-width: 768px) {
-  .invoice-item-row-form {
-    grid-template-columns: 1fr;
+  .invoices-stats-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-3);
   }
+
+  .stat-card {
+    padding: var(--space-3);
+    gap: var(--space-2);
+  }
+
+  .stat-value {
+    font-size: 1.05rem;
+  }
+
+  .stat-icon-wrapper {
+    width: 38px;
+    height: 38px;
+    font-size: 1.2rem;
+  }
+
+  .invoice-item-row-form {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-2);
+  }
+
   .invoice-item-row-form .btn-add-item {
-    grid-column: span 1;
+    grid-column: span 2;
+    height: 44px;
   }
 
   .invoices-filter-bar {
     flex-direction: column;
     align-items: stretch;
-    gap: var(--space-3);
+    gap: var(--space-2);
+    padding: var(--space-3);
+    margin-bottom: var(--space-4);
   }
 
   .invoices-filter-bar .filter-group {
@@ -157,24 +182,58 @@
 
   .invoices-filter-bar .filter-search {
     max-width: 100%;
+    min-width: 0;
   }
 
   .invoices-filter-bar .filter-date-input {
     width: 100% !important;
+    flex: 1;
+  }
+
+  .invoices-filter-bar label {
+    min-width: 26px;
+    flex-shrink: 0;
   }
 
   .invoices-filter-bar .orders-results-count {
     margin-right: 0;
     text-align: right;
   }
+}
 
-  .stat-card {
-    padding: var(--space-4);
-    gap: var(--space-3);
+@media (max-width: 480px) {
+  .invoices-stats-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-2);
   }
 
-  .stat-value {
-    font-size: 1.15rem;
+  .invoice-item-row-form {
+    grid-template-columns: 1fr;
+  }
+
+  .invoice-item-row-form .btn-add-item {
+    grid-column: span 1;
+  }
+
+  .invoices-filter-bar .filter-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--space-1);
+  }
+
+  .invoices-filter-bar label {
+    font-size: var(--text-xs);
+    min-width: 0;
+  }
+
+  .page-header-actions {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .page-header-actions .btn {
+    flex: 1;
+    justify-content: center;
   }
 }
 

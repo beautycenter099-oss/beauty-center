@@ -238,18 +238,32 @@
 /* ─── Responsive: Mobile & Tablet ─── */
 @media (max-width: 768px) {
   .staff-card-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--space-3);
+    flex-direction: row;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    padding: var(--space-4);
+  }
+
+  .staff-card-identity {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .staff-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .staff-schedule {
     padding: var(--space-3);
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   .schedule-grid {
-    min-width: 500px; /* Allow smooth horizontal scroll on small phones */
+    min-width: 460px;
   }
 
   .add-day-off-row {
@@ -259,5 +273,25 @@
 
   .add-day-off-row .input {
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .staff-card-header {
+    padding: var(--space-3);
+  }
+
+  .staff-card-actions {
+    gap: var(--space-2);
+  }
+
+  .staff-avatar {
+    width: 36px;
+    height: 36px;
+    font-size: var(--text-xs);
+  }
+
+  .days-off-section {
+    padding: 0 var(--space-4) var(--space-4);
   }
 }

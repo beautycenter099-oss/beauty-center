@@ -7,12 +7,14 @@
 html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
+  overflow-x: hidden;
 }
 
 body {
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 img, picture, video, canvas, svg {
@@ -22,6 +24,24 @@ img, picture, video, canvas, svg {
 
 input, button, textarea, select {
   font: inherit;
+}
+
+/* Prevent iOS from zooming in on focused inputs (requires 16px minimum) */
+input[type="text"],
+input[type="tel"],
+input[type="email"],
+input[type="number"],
+input[type="date"],
+input[type="password"],
+input[type="search"],
+textarea,
+select {
+  font-size: max(16px, 1em);
+}
+
+/* Override font-size fix for labels/small text */
+.label, .badge, .nav-section-label {
+  font-size: revert;
 }
 
 p, h1, h2, h3, h4, h5, h6 {
@@ -41,9 +61,29 @@ button {
   cursor: pointer;
   border: none;
   background: none;
+  /* Prevent double-tap zoom on buttons */
+  touch-action: manipulation;
+}
+
+/* Minimum touch target size for accessibility */
+button, [role="button"], .nav-item, .bottom-nav-item {
+  min-height: 44px;
+}
+
+/* Remove tap highlight on mobile */
+a, button, [role="button"] {
+  -webkit-tap-highlight-color: transparent;
 }
 
 table {
   border-collapse: collapse;
   width: 100%;
+}
+
+/* Smooth scrolling on iOS for scroll containers */
+.table-wrapper,
+.drawer-body,
+.sidebar,
+.searchable-select-options {
+  -webkit-overflow-scrolling: touch;
 }

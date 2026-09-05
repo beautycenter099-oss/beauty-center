@@ -611,6 +611,13 @@ table.data-table {
   gap: 0;
   border-bottom: 2px solid var(--border);
   margin-bottom: var(--space-6);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.page-tabs::-webkit-scrollbar {
+  display: none;
 }
 
 .page-tab {
@@ -819,6 +826,10 @@ table.data-table {
     font-size: var(--text-xs);
   }
 
+  .page-header > div:last-child {
+    width: 100%;
+  }
+
   .card {
     padding: var(--space-4);
     border-radius: var(--radius-md);
@@ -848,10 +859,8 @@ table.data-table {
   }
 
   .table-wrapper {
-    margin: 0 -var(--space-3);
-    border-radius: 0;
-    border-left: none;
-    border-right: none;
+    border-radius: var(--radius-sm);
+    -webkit-overflow-scrolling: touch;
   }
 
   .data-table th,
@@ -864,6 +873,12 @@ table.data-table {
     padding: var(--space-2) var(--space-3);
   }
 
+  .page-tab {
+    padding: var(--space-3) var(--space-4);
+    flex-shrink: 0;
+    white-space: nowrap;
+  }
+
   .toast-container {
     top: var(--space-3);
     left: var(--space-3);
@@ -873,6 +888,40 @@ table.data-table {
   .toast {
     min-width: 0;
     width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-header-title {
+    font-size: 1.15rem;
+  }
+
+  .page-header > div:last-child .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .card {
+    padding: var(--space-3);
+  }
+
+  .data-table th,
+  .data-table td {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .badge {
+    font-size: 10px;
+    padding: 2px 7px;
+  }
+
+  .empty-state {
+    padding: var(--space-8) var(--space-4);
+  }
+
+  .empty-state-title {
+    font-size: var(--text-base);
   }
 }
 
